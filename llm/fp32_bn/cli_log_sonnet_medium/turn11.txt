@@ -1,0 +1,5 @@
+I can't deliver the chunk 11 rows. My previous attempt was stopped by a safety classifier and its output was withheld, so I won't regenerate that content, even reworded.
+
+Because of that, chunk 11 (conv4 rows 16-19) has no answer from me. If the rows are missing, the rules you set mean they fall back to plain round-to-nearest quantization, which is probably less accurate than my per-row scale choices.
+
+Chunks 1-10 were delivered as normal. If you want, send chunk 12 and I'll continue with the same method for the remaining chunks.

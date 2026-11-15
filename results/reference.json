@@ -1,0 +1,306 @@
+{
+  "int8_rtn": {
+    "val": 82.1,
+    "test": 81.45,
+    "per_class_test": {
+      "airplane": 83.4,
+      "automobile": 89.4,
+      "bird": 70.6,
+      "cat": 64.6,
+      "deer": 81.4,
+      "dog": 75.0,
+      "frog": 86.5,
+      "horse": 83.3,
+      "ship": 90.8,
+      "truck": 89.5
+    },
+    "agree_fp32": 98.62,
+    "codes_changed": 0,
+    "note": "baseline"
+  },
+  "int8_kernelbal_conv1": {
+    "val": 81.96,
+    "test": 81.49,
+    "per_class_test": {
+      "airplane": 83.4,
+      "automobile": 89.3,
+      "bird": 70.0,
+      "cat": 64.9,
+      "deer": 81.9,
+      "dog": 75.2,
+      "frog": 86.4,
+      "horse": 83.4,
+      "ship": 90.8,
+      "truck": 89.6
+    },
+    "agree_fp32": 98.9,
+    "codes_changed": 20,
+    "note": "Opus/Sonnet int4 method, exact (conv1 only)"
+  },
+  "int8_kernelbal_all": {
+    "val": 82.08,
+    "test": 81.43,
+    "per_class_test": {
+      "airplane": 82.4,
+      "automobile": 89.3,
+      "bird": 70.1,
+      "cat": 66.3,
+      "deer": 81.4,
+      "dog": 75.0,
+      "frog": 86.9,
+      "horse": 82.6,
+      "ship": 90.8,
+      "truck": 89.5
+    },
+    "agree_fp32": 99.45,
+    "codes_changed": 1421,
+    "note": "same method on all conv layers"
+  },
+  "int8_fcbal": {
+    "val": 82.16,
+    "test": 81.4,
+    "per_class_test": {
+      "airplane": 83.3,
+      "automobile": 89.6,
+      "bird": 70.6,
+      "cat": 63.9,
+      "deer": 81.8,
+      "dog": 75.2,
+      "frog": 86.4,
+      "horse": 83.1,
+      "ship": 90.8,
+      "truck": 89.3
+    },
+    "agree_fp32": 98.57,
+    "codes_changed": 15,
+    "note": "Haiku int4 / Sonnet int8 method, exact"
+  },
+  "int8_kernelbal_all+fcbal": {
+    "val": 82.08,
+    "test": 81.41,
+    "per_class_test": {
+      "airplane": 82.3,
+      "automobile": 89.6,
+      "bird": 70.0,
+      "cat": 65.8,
+      "deer": 81.8,
+      "dog": 75.1,
+      "frog": 86.9,
+      "horse": 82.5,
+      "ship": 90.7,
+      "truck": 89.4
+    },
+    "agree_fp32": 99.45,
+    "codes_changed": 1436,
+    "note": "all conv kernels + fc rows"
+  },
+  "int4_rtn": {
+    "val": 60.38,
+    "test": 60.39,
+    "per_class_test": {
+      "airplane": 80.8,
+      "automobile": 86.9,
+      "bird": 30.7,
+      "cat": 70.3,
+      "deer": 85.5,
+      "dog": 72.4,
+      "frog": 34.1,
+      "horse": 73.6,
+      "ship": 44.3,
+      "truck": 25.3
+    },
+    "agree_fp32": 64.86,
+    "codes_changed": 0,
+    "note": "baseline"
+  },
+  "int4_kernelbal_conv1": {
+    "val": 63.28,
+    "test": 63.63,
+    "per_class_test": {
+      "airplane": 86.8,
+      "automobile": 91.1,
+      "bird": 37.3,
+      "cat": 74.5,
+      "deer": 87.8,
+      "dog": 70.3,
+      "frog": 41.0,
+      "horse": 75.3,
+      "ship": 51.2,
+      "truck": 21.0
+    },
+    "agree_fp32": 68.72,
+    "codes_changed": 13,
+    "note": "Opus/Sonnet int4 method, exact (conv1 only)"
+  },
+  "int4_kernelbal_all": {
+    "val": 77.92,
+    "test": 77.63,
+    "per_class_test": {
+      "airplane": 87.9,
+      "automobile": 95.1,
+      "bird": 62.6,
+      "cat": 68.4,
+      "deer": 75.6,
+      "dog": 78.1,
+      "frog": 75.9,
+      "horse": 71.8,
+      "ship": 79.4,
+      "truck": 81.5
+    },
+    "agree_fp32": 87.08,
+    "codes_changed": 1482,
+    "note": "same method on all conv layers"
+  },
+  "int4_fcbal": {
+    "val": 62.52,
+    "test": 62.24,
+    "per_class_test": {
+      "airplane": 77.7,
+      "automobile": 87.6,
+      "bird": 29.8,
+      "cat": 51.0,
+      "deer": 85.7,
+      "dog": 83.1,
+      "frog": 43.2,
+      "horse": 77.1,
+      "ship": 48.3,
+      "truck": 38.9
+    },
+    "agree_fp32": 66.5,
+    "codes_changed": 13,
+    "note": "Haiku int4 / Sonnet int8 method, exact"
+  },
+  "int4_kernelbal_all+fcbal": {
+    "val": 77.74,
+    "test": 77.8,
+    "per_class_test": {
+      "airplane": 83.2,
+      "automobile": 92.7,
+      "bird": 59.5,
+      "cat": 55.8,
+      "deer": 74.7,
+      "dog": 84.9,
+      "frog": 82.1,
+      "horse": 74.5,
+      "ship": 80.7,
+      "truck": 89.9
+    },
+    "agree_fp32": 87.14,
+    "codes_changed": 1495,
+    "note": "all conv kernels + fc rows"
+  },
+  "int2_rtn": {
+    "val": 8.96,
+    "test": 8.6,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 0.3,
+      "bird": 0.2,
+      "cat": 2.5,
+      "deer": 1.9,
+      "dog": 0.0,
+      "frog": 72.7,
+      "horse": 8.4,
+      "ship": 0.0,
+      "truck": 0.0
+    },
+    "agree_fp32": 8.8,
+    "codes_changed": 0,
+    "note": "baseline"
+  },
+  "int2_opus_twn": {
+    "val": 10.72,
+    "test": 10.89,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 1.9,
+      "bird": 0.0,
+      "cat": 0.0,
+      "deer": 0.0,
+      "dog": 13.4,
+      "frog": 3.3,
+      "horse": 0.0,
+      "ship": 79.5,
+      "truck": 10.8
+    },
+    "agree_fp32": 11.45,
+    "codes_changed": 5703,
+    "note": "Opus int2 method, exact (t=.30/.25, LS scale)"
+  },
+  "int2_sonnet_ternary": {
+    "val": 10.38,
+    "test": 10.16,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 0.3,
+      "bird": 97.6,
+      "cat": 0.0,
+      "deer": 0.0,
+      "dog": 0.0,
+      "frog": 0.0,
+      "horse": 0.0,
+      "ship": 3.0,
+      "truck": 0.7
+    },
+    "agree_fp32": 9.57,
+    "codes_changed": 1033,
+    "note": "Sonnet int2 method, exact (t=.32, scale x0.55, conv4 codes kept x0.72)"
+  },
+  "int2_sonnet_ternary_conv4too": {
+    "val": 15.3,
+    "test": 15.2,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 0.3,
+      "bird": 80.1,
+      "cat": 0.0,
+      "deer": 1.4,
+      "dog": 14.2,
+      "frog": 1.0,
+      "horse": 0.0,
+      "ship": 0.7,
+      "truck": 54.3
+    },
+    "agree_fp32": 14.74,
+    "codes_changed": 3544,
+    "note": "Sonnet method incl. conv4 codes (what it skipped)"
+  },
+  "int2_haiku_fc_only": {
+    "val": 12.5,
+    "test": 12.15,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 56.8,
+      "bird": 0.7,
+      "cat": 0.0,
+      "deer": 0.0,
+      "dog": 0.1,
+      "frog": 63.8,
+      "horse": 0.0,
+      "ship": 0.1,
+      "truck": 0.0
+    },
+    "agree_fp32": 12.56,
+    "codes_changed": 119,
+    "note": "Haiku int2 method, exact (fc only, t=.25, LS scale)"
+  },
+  "int2_twn_classic": {
+    "val": 9.54,
+    "test": 9.1,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 0.0,
+      "bird": 77.8,
+      "cat": 9.8,
+      "deer": 0.0,
+      "dog": 0.0,
+      "frog": 3.4,
+      "horse": 0.0,
+      "ship": 0.0,
+      "truck": 0.0
+    },
+    "agree_fp32": 8.59,
+    "codes_changed": 9036,
+    "note": "textbook TWN, 0.7*mean|w|, LS scale"
+  }
+}

@@ -1,0 +1,18 @@
+I read the whole file in 14 Read calls and made no other tool calls. The only change I made is to the fc layer, the output-sensitive layer. Its inputs are non-negative after ReLU and global average pooling, so the sum of rounding errors in each row acts as a systematic shift on the logits. For each fc row I summed the residuals (float units minus RTN code) and, where the sum was well away from zero, moved the rounding of the weights whose residual was nearest ±0.5. Each such flip adds almost no squared error. Rows 1, 5, 7 and 8 were left alone because their residual sums were under half a step. I did not edit the conv layers, since their fan-in is too large to do this by hand. I could not run the network, so the gain is a plausible but unverified estimate.
+
+BEGIN
+Q fc 0 0 0
+Q fc 0 19 -2
+Q fc 0 22 1
+Q fc 2 21 -2
+Q fc 2 22 -2
+Q fc 3 11 -1
+Q fc 3 36 2
+Q fc 3 37 6
+Q fc 4 2 0
+Q fc 6 47 -2
+Q fc 9 16 -1
+Q fc 9 36 -1
+Q fc 9 37 -1
+END
+TOOLS USED: Read /home/claude/wsp/llm/prompts/int4.txt lines 1-120 (offset 1, limit 120); Read same file offset 121, limit 120 (failed, file-size error, no content returned); Read same file lines 121-180; 181-240; 241-300; 301-360; 361-420; 421-480; 481-540; 541-600; 601-660; 661-720; 721-780 (each offset/limit 60); Read same file lines 781-803 (offset 781, limit 40).

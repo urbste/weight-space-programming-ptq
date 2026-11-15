@@ -1,0 +1,134 @@
+{
+  "opus": {
+    "tool_calls": 12,
+    "violations": [],
+    "read_order": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "output_tokens": 1325077,
+    "finished": true
+  },
+  "sonnet": {
+    "tool_calls": 12,
+    "violations": [],
+    "read_order": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "output_tokens": 4270,
+    "finished": true
+  },
+  "sonnet_run2": {
+    "tool_calls": 12,
+    "violations": [],
+    "read_order": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "output_tokens": 4429,
+    "finished": true
+  },
+  "haiku": {
+    "tool_calls": 12,
+    "violations": [],
+    "read_order": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "output_tokens": 170175,
+    "finished": true
+  }
+}

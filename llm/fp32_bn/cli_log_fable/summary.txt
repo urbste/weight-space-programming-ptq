@@ -1,0 +1,18 @@
+**How I chose the scales and codes**
+
+Every row was done by hand arithmetic in my head; nothing was run, and nothing was checked by a script. Arithmetic slips and miscounted rows are therefore possible. I did not machine-verify that each row has exactly 27/72/144/288/48 codes.
+
+**Scale per row.** I looked at the largest absolute weights in the row and set the scale at or slightly below `max|w| / 7`.
+- When the top few weights were close together, the scale sits near `max/7`, so almost nothing clips.
+- When one weight was an isolated outlier, I picked a smaller scale and let that weight clip to ±7. Examples are conv2 r4 and r5, conv3 r16 and r17, conv4 r36 and r42, and fc r1. The reason is that a finer step gives less rounding error on the many small weights, at the cost of a known error on one tap.
+- How far to clip was a judgement call per row, not an optimised quantity. I clipped less when the outlier was a centre tap or part of a group of large weights in one input channel, and in the fc layer, where logits are compared directly across rows.
+
+**Codes.** Each code is `round(w / scale)` clamped to [-7, 7], which is plain round-to-nearest at my chosen scale. For values landing almost exactly on .5 I broke ties ad hoc, sometimes alternating direction within a row so the row sum would not drift one way. That was not applied systematically.
+
+**What I did not do.**
+- I did not use the BatchNorm statistics at all. They could have been used to weight errors by channel importance or to estimate activation scales, but I could not do that reliably by hand.
+- There is no error compensation between weights or layers, no bias correction (biases are fixed anyway), and no search over scales to minimise per-row squared error.
+
+So the result is essentially per-row round-to-nearest with a mildly clipped scale. I expect it to behave like a reasonable 4-bit per-channel post-training quantization, probably a few points under the 82.14% float accuracy, but that is an expectation, not something I measured.
+
+**Delivery notes.** For chunks 3 and 16 my first reply was empty, and I answered when they were re-sent. Chunks 12 and 19 arrived pasted twice in one message, and I answered each once.

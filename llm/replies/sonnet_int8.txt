@@ -1,0 +1,41 @@
+I changed only a few fc codes, and the expected gain is tiny.
+
+The RTN network is already within 0.04 points of float (82.10% against 82.14%). With no data and no BatchNorm statistics, I couldn't safely retune scales, biases or conv kernels by hand, so I stayed with low-risk edits.
+
+For each fc row I computed the net rounding error of the 48 codes, sum(q − u) in step units. The fc inputs are post-ReLU global-average-pooled features, which are non-negative on average. A net error of one or two steps therefore adds a systematic offset to that class's logit. In each row I flipped the one to three codes whose fractional part was closest to 0.5, rounding them the other way. That cancels most of the net error at the smallest possible extra per-weight error. All of these codes stay in [−127, 127], and no scales or biases change.
+
+Net error before the flips (steps):
+
+| fc row | net error |
+|---|---|
+| r0 | +0.74 |
+| r1 | −3.16 |
+| r2 | +1.12 |
+| r3 | +2.51 |
+| r4 | −1.21 |
+| r5 | −0.70 |
+| r6 | +0.79 |
+| r7 | +2.28 |
+| r8 | −2.06 |
+| r9 | +1.07 |
+
+I did not edit conv1 to conv4. Cancelling the sum there would need per-channel activation means, which I don't have, and the hand arithmetic over thousands of codes was too error-prone.
+
+BEGIN
+Q fc 0 22 27
+Q fc 1 5 -5
+Q fc 1 7 -17
+Q fc 1 45 -23
+Q fc 2 4 10
+Q fc 3 19 -24
+Q fc 3 18 -66
+Q fc 4 23 -19
+Q fc 5 46 -22
+Q fc 6 5 -17
+Q fc 7 29 -11
+Q fc 7 33 18
+Q fc 8 45 -35
+Q fc 8 36 -64
+Q fc 9 16 -28
+END
+TOOLS USED: Read on /home/claude/wsp/llm/prompts/int8.txt, line ranges 0-120, 120-180 (failed: over the token limit), 120-180 (retry), 180-240, 240-300, 299-349, 349-399, 399-449, 449-499, 499-549, 549-599, 599-649, 649-699, 699-749, 749-809 (end of file at line 803). No other tools.

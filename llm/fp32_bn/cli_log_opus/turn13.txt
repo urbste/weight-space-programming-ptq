@@ -1,0 +1,1 @@
+My answer for chunk 13 was cut off partway through and I can't resend it. That means conv4 row 25 is incomplete and rows 26 and 27 are missing. Under your rules those rows will fall back to plain round-to-nearest quantization. Row 24 got through complete and is usable as written. I'm ready for chunk 14.

@@ -1,0 +1,77 @@
+You are given the complete trained float32 weights of a small convolutional network for CIFAR-10
+(10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck), together with its
+standard 4-bit post-training-quantized version. Your task: edit the 4-bit network so that it
+classifies as accurately as possible.
+
+RULES
+- No tools: no code execution, no calculator, no files, no internet. Do every computation in your own
+  reasoning and write the numbers directly.
+- You cannot run the network. There is no data and there are no BatchNorm statistics: the weights below
+  are all you get.
+- You may only change the quantized network's parameters: integer codes, per-row scales and per-row biases.
+  The result must remain a valid 4-bit network: integer codes in [-7, 7], one positive float
+  scale per output row, one float bias per output row. The architecture stays as it is.
+
+NETWORK
+Input: 3x32x32 RGB image, normalized per channel with mean (0.4914, 0.4822, 0.4465), std (0.2470, 0.2435, 0.2616).
+  conv1: Conv2d 3->8,   3x3, padding 1, bias, then ReLU
+  conv2: Conv2d 8->16,  3x3, padding 1, bias, then ReLU, then MaxPool 2x2
+  conv3: Conv2d 16->32, 3x3, padding 1, bias, then ReLU, then MaxPool 2x2
+  conv4: Conv2d 32->48, 3x3, padding 1, bias, then ReLU, then global average pooling
+  fc:    Linear 48->10 (logits; prediction = argmax)
+The network was trained with BatchNorm after every conv; BatchNorm has been folded into the conv weights and
+biases, so the network above is complete as written.
+
+4-BIT FORMAT AND STARTING POINT
+Every layer is stored as integer codes q in [-7, 7], one positive float scale per output row and one
+float bias per row. The effective weight is w = q * scale[row].
+The given 4-bit network is standard per-channel symmetric round-to-nearest PTQ:
+scale[row] = max|w_float[row]| / 7, q = round(w_float / scale[row]), biases copied unchanged.
+On a held-out split the float32 network scores 82.14% and this 4-bit network scores 60.38%.
+
+DUMP FORMAT (in the chunk files)
+For every layer and output row r:
+  "<layer> r<r> scale <s> bias <b>"                                   the RTN scale and the float bias
+  "<layer> r<r> u ...", one or more lines                              FLOAT32 weights in units of the row's
+                                                                        step: w_float = u * scale
+  "<layer> r<r> q ...", one or more lines                              the RTN INTEGER codes (q = round(u))
+conv layers: values are grouped per input channel; each group is "c<i>:" followed by the 3x3 kernel in
+row-major order (position p = 3*kh + kw, 0..8). Long rows are split over several lines (c0-c7, c8-c15, ...).
+fc: values are input features 0..47 in order, split over lines of 16 ("i0:" marks the first index on the line).
+
+EDIT LANGUAGE (your answer)
+  Q <layer> <row> <in_ch> <pos> <code>     set one conv code (pos 0..8)
+  Q fc <row> <in> <code>                   set one fc code
+  K <layer> <row> <in_ch> <9 codes>        replace a whole 3x3 kernel (conv only)
+  R fc <row> <48 codes>                    replace a whole fc row
+  S <layer> <row> <scale>                  set a row's scale (positive float)
+  B <layer> <row> <bias>                   set a row's bias (float)
+Rows/channels/positions are 0-based. Anything you do not edit stays as in the RTN network. If a parameter
+is edited twice, the later line wins. There is no fixed limit on the number of edits, but your whole answer
+is spread over one response per chunk (see below).
+
+ANSWER FORMAT
+Per chunk, as described under DELIVERY IN CHUNKS.
+
+DELIVERY IN CHUNKS (this experiment)
+The dump is NOT in this file. It is delivered in 11 chunk files, read one after another:
+  chunk01.txt: conv1 rows 0-7
+  chunk02.txt: conv2 rows 0-15
+  chunk03.txt: conv3 rows 0-15
+  chunk04.txt: conv3 rows 16-31
+  chunk05.txt: conv4 rows 0-7
+  chunk06.txt: conv4 rows 8-15
+  chunk07.txt: conv4 rows 16-23
+  chunk08.txt: conv4 rows 24-31
+  chunk09.txt: conv4 rows 32-39
+  chunk10.txt: conv4 rows 40-47
+  chunk11.txt: fc rows 0-9
+Work strictly chunk by chunk. In EACH response:
+  1. read exactly one chunk file (the next one in order),
+  2. think about that chunk only (you may use everything you have seen so far),
+  3. write the edit lines for the rows of that chunk as plain text, between a line "BEGIN CHUNK <k>" and a
+     line "END CHUNK <k>" (write "BEGIN CHUNK <k>" / "END CHUNK <k>" with nothing between if you make no edits),
+  4. in the same response, read the next chunk file.
+Because every chunk gets its own response, you have the budget to treat EVERY row of every layer; you do not need
+to restrict yourself to a few rows or layers. After the last chunk, send a final message with a short summary
+(what you changed and why) and "TOOLS USED: <every tool call>". Do not repeat the edit lines in the final message.

@@ -1,0 +1,50 @@
+You are given the complete trained float32 weights of a small convolutional network for CIFAR-10
+(10 classes: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck). Your task: turn it into a
+4-bit weight-quantized network that classifies as accurately as possible, by writing the 4-bit network yourself.
+
+RULES
+- You cannot run the network. There is no data: the weights and BatchNorm statistics in the chunk
+  files are all you get.
+- The result must be a valid 4-bit network: every layer is stored as integer codes q in [-7, 7] and one positive
+  float scale per output row, and the effective weight is w = q * scale[row]. Biases stay float32 exactly as given
+  (you may not change them). The architecture stays as it is. You choose the scale of every row and every code.
+
+NETWORK
+Input: 3x32x32 RGB image, normalized per channel with mean (0.4914, 0.4822, 0.4465), std (0.2470, 0.2435, 0.2616).
+  conv1: Conv2d 3->8,   3x3, padding 1, bias, then ReLU
+  conv2: Conv2d 8->16,  3x3, padding 1, bias, then ReLU, then MaxPool 2x2
+  conv3: Conv2d 16->32, 3x3, padding 1, bias, then ReLU, then MaxPool 2x2
+  conv4: Conv2d 32->48, 3x3, padding 1, bias, then ReLU, then global average pooling
+  fc:    Linear 48->10 (logits; prediction = argmax)
+The network was trained with BatchNorm after every conv; BatchNorm has been folded into the conv weights and
+biases, so the network above is complete as written. For information, the BatchNorm statistics of the
+original network are given per conv output channel (line "<layer> r<r> bn gamma .. beta .. mean .. var .."): the
+BatchNorm computed  y = gamma * (x - mean) / sqrt(var + 1e-5) + beta  on the conv output x, where mean and var are
+the running statistics over the training data. The folded weights and bias in the dump are
+w_folded = w_raw * gamma / sqrt(var + 1e-5) and b_folded = beta - mean * gamma / sqrt(var + 1e-5); you quantize the
+FOLDED weights, the bias stays as given. fc has no BatchNorm. On a held-out split the float32 network scores 82.14%.
+
+DUMP FORMAT (in the chunk files)
+For every layer and output row r:
+  "<layer> r<r> bias <b>"                                       the float bias (stays as given)
+  "<layer> r<r> bn gamma <g> beta <b> mean <m> var <v>"          BatchNorm statistics (conv layers only; information)
+  "<layer> r<r> w ...", one or more lines                       the FLOAT32 weights of that row (3 decimals)
+conv layers: values are grouped per input channel; each group is "c<i>:" followed by the 3x3 kernel in
+row-major order (position p = 3*kh + kw, 0..8). Long rows are split over several lines.
+fc: values are input features 0..47 in order, split over lines of 16 ("i0:" marks the first index on the line).
+
+YOUR ANSWER: ONE LINE PER OUTPUT ROW
+  ROW <layer> <r> SCALE <positive float> Q <codes>
+<codes> are the integer codes of that row, separated by single spaces, in exactly the order of the weights in the
+dump (conv rows: input channel 0 kernel p=0..8, then input channel 1 kernel, ...; no "c<i>:" labels, no "|";
+fc rows: inputs 0..47). A conv row has 9 * (number of input channels) codes (conv1: 27, conv2: 72, conv3: 144,
+conv4: 288), an fc row has 48. Example for a conv1 row:  ROW conv1 0 SCALE 0.0635 Q 4 -1 0 -4 2 ... (27 codes).
+Write EVERY row of the chunk. A row that is missing, has a wrong number of codes, a code outside [-7, 7] or a
+non-positive scale cannot be used and is replaced by plain round-to-nearest quantization of that row.
+
+DELIVERY IN CHUNKS
+The weight dump is delivered in 19 messages, one chunk per message, after this one. For EACH chunk message, write the
+ROW lines for ALL rows of that chunk as plain text between a line "BEGIN CHUNK <k>" and a line "END CHUNK <k>", and
+nothing else. You may use everything you have seen so far. After the last chunk I will ask for a short summary of how
+you chose the scales and codes. Now reply only with the word READY.
+

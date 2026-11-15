@@ -1,0 +1,48 @@
+[... lines up to EDIT LANGUAGE identical to P1 (Figure 9), except "DUMP FORMAT (below)"
+ reads "DUMP FORMAT (in the chunk files)" ...]
+
+EDIT LANGUAGE (your answer)
+  Q <layer> <row> <in_ch> <pos> <code>     set one conv code (pos 0..8)
+  Q fc <row> <in> <code>                   set one fc code
+  K <layer> <row> <in_ch> <9 codes>        replace a whole 3x3 kernel (conv only)
+  R fc <row> <48 codes>                    replace a whole fc row
+  S <layer> <row> <scale>                  set a row's scale (positive float)
+  B <layer> <row> <bias>                   set a row's bias (float)
+Rows/channels/positions are 0-based. Anything you do not edit stays as in the RTN network. If a parameter
+is edited twice, the later line wins. There is no fixed limit on the number of edits, but your whole answer
+is spread over one response per chunk (see below).
+
+ANSWER FORMAT
+Per chunk, as described under DELIVERY IN CHUNKS.
+
+DELIVERY IN CHUNKS (this experiment)
+The dump is NOT in this file. It is delivered in 11 chunk files, read one after another:
+  chunk01.txt: conv1 rows 0-7
+  chunk02.txt: conv2 rows 0-15
+  chunk03.txt: conv3 rows 0-15
+  chunk04.txt: conv3 rows 16-31
+  chunk05.txt: conv4 rows 0-7
+  chunk06.txt: conv4 rows 8-15
+  chunk07.txt: conv4 rows 16-23
+  chunk08.txt: conv4 rows 24-31
+  chunk09.txt: conv4 rows 32-39
+  chunk10.txt: conv4 rows 40-47
+  chunk11.txt: fc rows 0-9
+Work strictly chunk by chunk. In EACH response:
+  1. read exactly one chunk file (the next one in order),
+  2. think about that chunk only (you may use everything you have seen so far),
+  3. write the edit lines for the rows of that chunk as plain text, between a line "BEGIN CHUNK <k>" and a
+     line "END CHUNK <k>" (write "BEGIN CHUNK <k>" / "END CHUNK <k>" with nothing between if you make no edits),
+  4. in the same response, read the next chunk file.
+Because every chunk gets its own response, you have the budget to treat EVERY row of every layer; you do not ...
+to restrict yourself to a few rows or layers. After the last chunk, send a final message with a short summary
+(what you changed and why) and "TOOLS USED: <every tool call>". Do not repeat the edit lines in the final me ...
+
+
+--- chunk01.txt (start) ---
+CHUNK 1/11: conv1 rows 0-7
+## conv1 rows 0-7
+conv1 r0 scale 0.0635392 bias 0.3771
+conv1 r0 u  c0: 3.83 -1.47 0.37 -4.49 2.26 -0.49 0.82 -0.91 -0.55 | c1: 0.14 0.49 -0.50 -7.00 6.61 1.87 -1.1 ...
+conv1 r0 q  c0: 4 -1 0 -4 2 0 1 -1 -1 | c1: 0 0 0 -7 7 2 -1 0 1 | c2: -1 -1 -1 -6 5 1 -1 2 1
+[...]

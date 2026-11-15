@@ -1,0 +1,20 @@
+## How I chose the scales and codes
+
+**Codes.** Within each row, every code is plain round-to-nearest, q = round(w / scale), clipped to [-7, 7]. I resolved exact half-way ties case by case, so tie handling is not perfectly consistent.
+
+**Scales.** Every row got its own symmetric scale.
+
+- **conv1, conv2, conv3:** scale = max|w| / 7. These rows have fairly even weight distributions without big outliers. Using the full range keeps the largest weights exact while keeping the step small.
+- **conv4 and fc:** these rows often have one or two weights well above the rest. Examples are conv4 r2 (3.14 against a bulk under 2.7), r21 (2.89), r36 (3.22), and fc r1 (2.81 against 1.71).
+  - For these, I set the scale below max/7, typically around the 2nd–5th largest magnitude divided by 7, rounded to a convenient value like 0.28 or 0.40.
+  - The few outliers saturate at ±7 and are slightly under-represented.
+  - In exchange, the many small and medium weights get a finer step.
+  - With only 15 levels, this usually lowers total squared error and keeps the output more faithful.
+  - Where the top values were close together, I used plain max/7.
+
+**Why only weight-space choices.** Biases are fixed and there is no data, so I couldn't do bias correction, activation-aware rounding, or cross-layer equalization. I only read the BatchNorm statistics as context; they didn't change any scale.
+
+**Caveats:**
+
+- My attempt to script the quantization at the start failed because the tool calls returned nothing. Everything was then computed by hand, so occasional rounding slips are possible.
+- My chunk 13 answer was cut off. conv4 row 24 is complete, row 25 is truncated, and rows 26–27 are missing. Under your rules, rows 25–27 fall back to round-to-nearest.

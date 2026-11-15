@@ -1,0 +1,31 @@
+{
+ "tool_calls": 22,
+ "reads": [
+  "task.txt",
+  "chunk01.txt",
+  "chunk02.txt",
+  "chunk03.txt",
+  "chunk04.txt",
+  "chunk05.txt",
+  "chunk06.txt",
+  "chunk07.txt",
+  "chunk08.txt",
+  "chunk09.txt",
+  "chunk10.txt",
+  "chunk11.txt",
+  "chunk12.txt",
+  "chunk13.txt",
+  "chunk14.txt",
+  "chunk15.txt",
+  "chunk16.txt",
+  "chunk17.txt",
+  "chunk18.txt",
+  "chunk19.txt",
+  "?",
+  "?"
+ ],
+ "violations": [],
+ "responses": 22,
+ "output_tokens": 234777,
+ "note": "SubagentHandback calls (harness delivery of the final report) excluded; second Read-free turn was the resumption asking for chunks 1 and 19 as visible text"
+}

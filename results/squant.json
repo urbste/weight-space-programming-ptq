@@ -1,0 +1,36 @@
+{
+ "int4": {
+  "squant_K": {
+   "val": 77.92,
+   "test": 77.63,
+   "codes_changed": 1482
+  },
+  "squant_KC": {
+   "val": 79.24,
+   "test": 79.06,
+   "codes_changed": 1490
+  },
+  "squant_C": {
+   "val": 77.88,
+   "test": 78.58,
+   "codes_changed": 341
+  }
+ },
+ "int3": {
+  "squant_K": {
+   "val": 58.34,
+   "test": 59.17,
+   "codes_changed": 1487
+  },
+  "squant_KC": {
+   "val": 57.9,
+   "test": 57.6,
+   "codes_changed": 1497
+  },
+  "squant_C": {
+   "val": 58.28,
+   "test": 58.98,
+   "codes_changed": 369
+  }
+ }
+}

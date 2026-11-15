@@ -1,0 +1,579 @@
+{
+  "opus_int8": {
+    "val": 82.12,
+    "test": 81.46,
+    "per_class_test": {
+      "airplane": 83.4,
+      "automobile": 89.4,
+      "bird": 70.7,
+      "cat": 64.6,
+      "deer": 81.4,
+      "dog": 75.0,
+      "frog": 86.5,
+      "horse": 83.3,
+      "ship": 90.8,
+      "truck": 89.5
+    },
+    "agree_fp32": 98.6,
+    "delta_vs_rtn_test": 0.01,
+    "edits": {
+      "lines": 1,
+      "applied": 1,
+      "invalid": [],
+      "by_kind": {
+        "S": 1
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 1,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    }
+  },
+  "sonnet_int8": {
+    "val": 82.22,
+    "test": 81.4,
+    "per_class_test": {
+      "airplane": 83.3,
+      "automobile": 89.6,
+      "bird": 70.5,
+      "cat": 64.0,
+      "deer": 81.8,
+      "dog": 75.2,
+      "frog": 86.4,
+      "horse": 83.1,
+      "ship": 90.8,
+      "truck": 89.3
+    },
+    "agree_fp32": 98.58,
+    "delta_vs_rtn_test": -0.05,
+    "edits": {
+      "lines": 15,
+      "applied": 15,
+      "invalid": [],
+      "by_kind": {
+        "Q": 15
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 15,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    }
+  },
+  "haiku_int8": {
+    "val": 82.1,
+    "test": 81.45,
+    "per_class_test": {
+      "airplane": 83.4,
+      "automobile": 89.4,
+      "bird": 70.6,
+      "cat": 64.6,
+      "deer": 81.4,
+      "dog": 75.0,
+      "frog": 86.5,
+      "horse": 83.3,
+      "ship": 90.8,
+      "truck": 89.5
+    },
+    "agree_fp32": 98.62,
+    "delta_vs_rtn_test": 0.0,
+    "edits": {
+      "lines": 0,
+      "applied": 0,
+      "invalid": [],
+      "by_kind": {}
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    }
+  },
+  "opus_int4": {
+    "val": 63.98,
+    "test": 64.07,
+    "per_class_test": {
+      "airplane": 87.7,
+      "automobile": 91.6,
+      "bird": 37.1,
+      "cat": 74.1,
+      "deer": 89.5,
+      "dog": 69.2,
+      "frog": 41.6,
+      "horse": 75.8,
+      "ship": 50.5,
+      "truck": 23.6
+    },
+    "agree_fp32": 69.13,
+    "delta_vs_rtn_test": 3.68,
+    "edits": {
+      "lines": 11,
+      "applied": 11,
+      "invalid": [],
+      "by_kind": {
+        "Q": 11
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 11,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    }
+  },
+  "sonnet_int4": {
+    "val": 64.14,
+    "test": 64.37,
+    "per_class_test": {
+      "airplane": 88.1,
+      "automobile": 91.8,
+      "bird": 37.9,
+      "cat": 73.2,
+      "deer": 88.9,
+      "dog": 69.7,
+      "frog": 44.0,
+      "horse": 76.0,
+      "ship": 51.9,
+      "truck": 22.2
+    },
+    "agree_fp32": 69.5,
+    "delta_vs_rtn_test": 3.98,
+    "edits": {
+      "lines": 13,
+      "applied": 13,
+      "invalid": [],
+      "by_kind": {
+        "Q": 13
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 13,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    }
+  },
+  "haiku_int4": {
+    "val": 62.54,
+    "test": 62.18,
+    "per_class_test": {
+      "airplane": 77.8,
+      "automobile": 87.7,
+      "bird": 28.8,
+      "cat": 51.0,
+      "deer": 85.7,
+      "dog": 83.1,
+      "frog": 43.2,
+      "horse": 77.1,
+      "ship": 48.3,
+      "truck": 39.1
+    },
+    "agree_fp32": 66.46,
+    "delta_vs_rtn_test": 1.79,
+    "edits": {
+      "lines": 13,
+      "applied": 13,
+      "invalid": [],
+      "by_kind": {
+        "Q": 13
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 13,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    }
+  },
+  "opus_int2": {
+    "val": 9.96,
+    "test": 10.31,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 6.2,
+      "bird": 0.0,
+      "cat": 0.0,
+      "deer": 0.0,
+      "dog": 10.8,
+      "frog": 0.6,
+      "horse": 0.0,
+      "ship": 83.3,
+      "truck": 2.2
+    },
+    "agree_fp32": 10.88,
+    "delta_vs_rtn_test": 1.71,
+    "edits": {
+      "lines": 2193,
+      "applied": 2193,
+      "invalid": [],
+      "by_kind": {
+        "K": 2069,
+        "S": 114,
+        "R": 10
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 47,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 216,
+        "scales_changed": 8,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 326,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 1152,
+        "scales_changed": 16,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 1269,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 4608,
+        "scales_changed": 32,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 4144,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 13824,
+        "scales_changed": 48,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 127,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 480,
+        "scales_changed": 10,
+        "biases_changed": 0
+      }
+    }
+  },
+  "sonnet_int2": {
+    "val": 11.02,
+    "test": 10.79,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 0.0,
+      "bird": 98.1,
+      "cat": 0.0,
+      "deer": 0.0,
+      "dog": 0.0,
+      "frog": 0.0,
+      "horse": 0.0,
+      "ship": 9.7,
+      "truck": 0.1
+    },
+    "agree_fp32": 10.29,
+    "delta_vs_rtn_test": 2.19,
+    "edits": {
+      "lines": 874,
+      "applied": 873,
+      "invalid": [
+        "R fc 3 0 0 -1 0 -1 0 -1 0 1 1 1 0 0 0 -1 -1 0 0 -1 0 0 0 1 0 0 -1 0 0 0 0 0 0 -1 0 0 1 0 1 1 0 1 -1 0 0 1 -1 -1 1 -1  <- arity"
+      ],
+      "by_kind": {
+        "S": 114,
+        "K": 155,
+        "Q": 595,
+        "R": 9
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 39,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 216,
+        "scales_changed": 8,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 219,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 1152,
+        "scales_changed": 16,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 670,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 4608,
+        "scales_changed": 32,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 48,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 74,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 480,
+        "scales_changed": 10,
+        "biases_changed": 0
+      }
+    }
+  },
+  "haiku_int2": {
+    "val": 11.62,
+    "test": 11.68,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 14.1,
+      "bird": 0.7,
+      "cat": 0.0,
+      "deer": 0.4,
+      "dog": 0.7,
+      "frog": 88.2,
+      "horse": 12.4,
+      "ship": 0.3,
+      "truck": 0.0
+    },
+    "agree_fp32": 12.18,
+    "delta_vs_rtn_test": 3.08,
+    "edits": {
+      "lines": 20,
+      "applied": 17,
+      "invalid": [
+        "R fc 1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 0 0 0 0 1 0 0 0 0 0 0  <- arity",
+        "R fc 7 -1 0 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 -1 0 -1 0 0 -1 0 0 0 -1 1 -1 1 0 -1 0 0 0 0 1 1 0 -1 -1 -1 1 0 0 0 0 0  <- arity",
+        "R fc 8 -1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 1 0 0 1 -1 0 0 0 0 1 -1 0 0 0 0 0 0 0 0 0 0 -1 0 0 0 0 1 0 -1 1 -1 -1 0  <- arity"
+      ],
+      "by_kind": {
+        "R": 7,
+        "S": 10
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 87,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 480,
+        "scales_changed": 10,
+        "biases_changed": 0
+      }
+    }
+  }
+}

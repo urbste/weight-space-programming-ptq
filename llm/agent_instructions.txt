@@ -1,0 +1,13 @@
+This is an experiment about what a language model can do WITHOUT tools.
+
+TOOL RULE (strict): The only tool you may call is the file-reading tool (Read), and only on this single file:
+{prompt_path}
+That file contains your task description and the complete network; reading it is only how the input is delivered.
+Read it completely, in consecutive chunks (e.g. offset/limit of about 120 lines; the file has about {n_lines} lines).
+You must NOT use any other tool and must not read any other file: no directory listing or search, no terminal,
+no code execution, no Python, no calculator, no file writing, no web, no subagents. All analysis and arithmetic
+must happen in your own reasoning.
+
+After you have read the whole file, solve the task described in it. Your final message is your answer and must
+follow the ANSWER FORMAT from the file exactly: a short explanation, then the edit lines between a line "BEGIN"
+and a line "END", then "TOOLS USED:" listing every tool call you made (with the line ranges you read).

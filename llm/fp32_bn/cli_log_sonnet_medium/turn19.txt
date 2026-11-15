@@ -1,0 +1,11 @@
+I can't deliver the chunk 19 rows. This is the ninth chunk in a row (11-19) whose attempt was stopped by the safety classifier, and I won't regenerate that content, even reworded.
+
+Under your rules, fc rows 0-9 will fall back to plain round-to-nearest quantization, like the other withheld chunks. That means only chunks 1-10 (conv1, conv2, conv3 and conv4 rows 0-11) carry my own scales and codes. Chunks 11-19 (conv4 rows 12-47 and fc) are fallback.
+
+**Summary of what I did for chunks 1-10:**
+- **Scale:** each row's scale is its maximum absolute weight divided by 7, so the largest weight maps to code ±7.
+- **Codes:** each code is the folded weight divided by the scale, rounded to the nearest integer and kept in [-7, 7]. Codes are written in dump order.
+- **Biases:** left untouched.
+- **Limits:** I did no cross-layer compensation or error balancing. My per-row results are therefore close to plain round-to-nearest. They are unchecked, because I can't run the network.
+
+I can't tell why the classifier stopped chunks 11-19. If you want to retry any of them, send a chunk again in a different form (for example a smaller subset of rows) and I'll answer it.

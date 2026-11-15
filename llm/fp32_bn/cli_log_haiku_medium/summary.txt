@@ -1,0 +1,11 @@
+I quantized each row independently with per-row max-abs scaling:
+
+- **Scale:** For each output row, I took the largest absolute weight and set `SCALE = max|w| / 7`, so the largest weight maps to code ±7 and nothing clips.
+- **Codes:** Each weight became `round(w / SCALE)`, with values rounded half away from zero. Weights are kept in the dump's order, and the BatchNorm-folded weights are what I quantized, as specified.
+- **Why:** Per-row scaling matches the format's one-scale-per-row constraint and is the simplest choice that avoids clipping. Using a percentile or an MSE-optimal scale could give lower error on outliers, but it would have clipped the largest weights, which often matter most, and I had no data to tune it against.
+
+Things you should know:
+
+- **Corrections:** My chunk 2 reply was cut short (rows 3–15 were missing), so I reissued the full chunk. My chunk 7 reply had a garbled row 3, which I reissued cleanly. The reissued versions are the ones to use.
+- **Verification:** I did all rounding by hand and did not machine-check the code counts or every rounding decision. Some off-by-one rounding at exact half-integers is possible, and a few transcription errors may remain. I could not run the network, so I have no accuracy estimate for the 4-bit model.
+- **Likely error sources:** Biggest expected loss is in conv1 and conv2, where the per-row range is wide relative to most weights, so the small weights round to zero. Errors in the final fc layer also matter directly for the logits.

@@ -1,0 +1,23 @@
+I made no edits. Every weight is already the nearest-integer code of its float value, so each error is at most half a step. The only edit that could help is compensating the per-row sum of rounding errors, since the post-ReLU features are nonnegative. Checking fc row 0 shows that sum is only about -0.7 code units across 48 inputs, which changes a logit by well under the existing rounding noise. Without activation statistics or a way to run the network, I cannot show that any change beats the 82.10% baseline, so I left the RTN network unchanged.
+
+BEGIN
+END
+
+TOOLS USED:
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 1-120 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 121-240 (too large, not returned)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 241-360 (too large, not returned)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 361-480 (too large, not returned)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 481-600 (too large, not returned)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 601-720 (too large, not returned)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 721-803 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 121-180 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 181-240 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 241-300 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 301-360 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 361-420 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 421-480 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 481-540 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 541-600 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 601-660 (succeeded)
+- Read /home/claude/wsp/llm/prompts/int8.txt lines 661-720 (succeeded)

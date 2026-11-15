@@ -1,0 +1,884 @@
+I changed the quantized network so the ternary codes and scales match the float weights much better. The RTN network sets the scale to the row's maximum weight and zeroes every weight below half of it, so it drops most weights and overstates the rest. I could not run anything, so none of this is tested.
+
+- **Scales:** each row's scale is now 0.55 times the RTN scale, close to the mean magnitude of the weights that stay nonzero. In conv4 I only rescaled, by 0.72.
+- **conv1, conv2 and fc:** every weight with magnitude at least 0.32 of the row maximum now gets a code of plus or minus 1. In fc this was done with `R` lines.
+- **conv3:** I kept all RTN nonzeros and added codes for weights with magnitude about 0.33 to 0.5 of the row maximum. I scanned all 32 rows by hand, so a few borderline weights may be missed.
+- **conv4 codes and all biases:** unchanged. conv4 has about 14k weights and the edits did not fit in one response.
+
+BEGIN
+S conv1 0 0.2446
+S conv1 1 0.1626
+S conv1 2 0.1942
+S conv1 3 0.1114
+S conv1 4 0.3756
+S conv1 5 0.2333
+S conv1 6 0.2344
+S conv1 7 0.1469
+K conv1 0 0 1 0 0 -1 1 0 0 0 0
+K conv1 0 1 0 0 0 -1 1 0 0 0 0
+K conv1 0 2 0 0 0 -1 1 0 0 1 0
+K conv1 1 0 0 -1 0 0 -1 0 0 1 1
+K conv1 1 1 0 -1 0 0 -1 0 1 1 1
+K conv1 1 2 0 0 0 0 -1 0 0 0 1
+K conv1 2 0 0 0 0 -1 0 1 -1 -1 1
+K conv1 2 1 0 0 0 -1 -1 0 0 -1 0
+K conv1 2 2 0 0 -1 1 1 0 1 0 0
+K conv1 3 0 0 0 1 0 0 -1 0 0 -1
+K conv1 3 1 0 0 0 1 0 -1 1 0 -1
+K conv1 3 2 -1 0 0 1 0 -1 1 0 -1
+K conv1 4 0 0 0 0 0 1 1 0 -1 1
+K conv1 4 1 0 0 -1 1 1 -1 1 -1 -1
+K conv1 4 2 0 -1 0 -1 1 0 -1 0 1
+K conv1 5 0 0 0 0 0 1 -1 1 1 -1
+K conv1 5 1 0 0 1 -1 0 0 -1 -1 0
+K conv1 5 2 0 0 0 0 1 0 0 0 0
+K conv1 6 0 -1 -1 0 -1 1 1 -1 0 0
+K conv1 6 1 0 0 0 0 1 0 0 0 -1
+K conv1 6 2 0 0 0 0 1 0 0 -1 -1
+K conv1 7 0 0 1 0 0 1 0 -1 0 0
+K conv1 7 1 0 1 0 -1 1 0 -1 0 0
+K conv1 7 2 0 1 0 0 1 -1 0 0 -1
+S conv2 0 0.2636
+S conv2 1 0.2795
+S conv2 2 0.3135
+S conv2 3 0.2423
+S conv2 4 0.3286
+S conv2 5 0.3900
+S conv2 6 0.1961
+S conv2 7 0.1951
+S conv2 8 0.2582
+S conv2 9 0.2710
+S conv2 10 0.1199
+S conv2 11 0.2392
+S conv2 12 0.2883
+S conv2 13 0.2668
+S conv2 14 0.2025
+S conv2 15 0.3035
+K conv2 0 0 -1 0 -1 0 0 0 0 1 -1
+K conv2 0 1 0 0 0 -1 0 0 0 0 -1
+K conv2 0 3 1 0 -1 0 -1 0 0 -1 1
+K conv2 0 4 0 0 0 -1 -1 0 0 1 1
+K conv2 0 5 1 1 0 1 0 -1 -1 -1 -1
+K conv2 0 6 0 1 1 -1 -1 -1 0 0 0
+K conv2 0 7 0 0 0 0 -1 -1 0 0 0
+K conv2 1 0 0 0 0 1 0 0 -1 0 1
+K conv2 1 1 -1 -1 0 -1 -1 -1 1 -1 -1
+K conv2 1 2 0 0 1 1 -1 0 0 1 0
+K conv2 1 3 -1 0 0 0 -1 -1 0 0 0
+K conv2 1 4 0 -1 1 0 0 0 0 1 0
+K conv2 1 5 0 0 0 0 0 0 0 -1 0
+K conv2 1 6 0 0 0 0 1 0 0 0 0
+K conv2 1 7 0 0 0 0 1 0 0 0 1
+K conv2 2 0 0 0 0 -1 1 0 1 1 0
+K conv2 2 1 -1 0 -1 1 1 0 0 0 0
+K conv2 2 2 -1 0 -1 0 0 0 0 1 0
+K conv2 2 3 0 1 0 1 1 0 -1 0 1
+K conv2 2 4 0 0 -1 0 0 1 0 0 0
+K conv2 2 5 0 0 0 0 0 0 0 1 0
+K conv2 2 6 0 0 1 1 0 1 0 -1 1
+K conv2 2 7 1 0 -1 1 1 1 0 -1 0
+K conv2 3 0 0 0 0 0 0 0 0 1 0
+K conv2 3 2 1 1 0 0 1 1 -1 0 1
+K conv2 3 3 0 1 0 0 0 0 0 0 0
+K conv2 3 5 -1 -1 -1 0 -1 -1 1 1 1
+K conv2 3 6 0 0 0 0 0 -1 0 0 0
+K conv2 3 7 0 0 0 0 0 0 0 0 1
+K conv2 4 4 0 1 0 -1 -1 -1 0 1 0
+K conv2 4 6 0 0 0 0 1 0 0 0 0
+K conv2 4 7 0 0 0 -1 0 0 0 0 -1
+K conv2 5 2 0 -1 -1 0 -1 -1 0 0 0
+K conv2 5 3 0 0 1 0 0 0 0 -1 0
+K conv2 5 4 -1 0 1 -1 0 1 0 0 0
+K conv2 5 5 0 -1 -1 0 -1 0 0 0 0
+K conv2 6 0 0 -1 0 -1 0 0 1 1 0
+K conv2 6 1 -1 0 1 0 0 0 1 0 0
+K conv2 6 2 0 0 0 0 0 -1 0 0 0
+K conv2 6 3 1 1 -1 0 -1 0 -1 -1 0
+K conv2 6 4 0 0 0 0 -1 0 0 0 0
+K conv2 6 5 1 -1 0 -1 -1 1 0 1 0
+K conv2 6 6 0 -1 1 -1 0 1 0 1 0
+K conv2 6 7 0 0 0 0 -1 0 -1 -1 0
+K conv2 7 0 0 0 0 -1 -1 -1 -1 -1 -1
+K conv2 7 1 0 0 0 0 0 -1 0 0 0
+K conv2 7 2 0 -1 0 0 0 -1 0 1 0
+K conv2 7 3 0 0 0 0 0 1 1 0 1
+K conv2 7 4 1 0 0 0 0 0 1 0 0
+K conv2 7 5 0 0 1 0 -1 0 0 0 0
+K conv2 7 6 -1 0 0 0 0 0 -1 0 0
+K conv2 7 7 0 0 0 0 0 0 0 -1 -1
+K conv2 8 0 0 1 -1 0 1 -1 0 0 0
+K conv2 8 1 0 -1 0 0 -1 0 -1 -1 0
+K conv2 8 2 -1 0 0 -1 0 0 -1 1 0
+K conv2 8 3 0 1 1 0 0 0 0 0 1
+K conv2 8 4 0 0 1 0 0 1 0 0 0
+K conv2 8 5 1 0 -1 1 0 0 1 -1 0
+K conv2 8 6 -1 0 0 0 0 0 0 0 0
+K conv2 8 7 0 0 0 0 0 -1 0 -1 0
+K conv2 9 0 0 0 0 -1 -1 0 0 0 1
+K conv2 9 1 0 -1 0 -1 -1 -1 -1 0 0
+K conv2 9 2 0 0 0 0 0 0 0 0 1
+K conv2 9 3 0 0 0 1 0 1 0 0 0
+K conv2 9 4 0 1 0 0 0 0 0 0 0
+K conv2 9 5 1 0 0 1 0 0 0 0 0
+K conv2 9 6 0 0 -1 -1 0 -1 0 0 0
+K conv2 10 0 -1 -1 0 -1 -1 -1 0 0 0
+K conv2 10 1 -1 -1 0 -1 -1 -1 -1 -1 0
+K conv2 10 2 0 0 0 0 0 -1 0 0 0
+K conv2 10 3 0 -1 0 -1 -1 -1 -1 0 0
+K conv2 10 4 0 0 0 -1 0 0 0 0 0
+K conv2 10 6 0 -1 -1 -1 -1 -1 0 -1 0
+K conv2 10 7 -1 -1 0 -1 -1 -1 -1 -1 0
+K conv2 11 0 0 -1 1 0 -1 1 0 -1 1
+K conv2 11 1 0 0 0 -1 -1 0 0 0 0
+K conv2 11 2 1 0 -1 0 -1 0 1 0 0
+K conv2 11 3 0 0 -1 0 0 -1 0 1 0
+K conv2 11 4 1 -1 0 1 -1 0 0 0 0
+K conv2 11 5 0 -1 0 1 -1 0 0 0 0
+K conv2 11 7 0 0 -1 0 -1 0 1 -1 -1
+K conv2 12 0 0 0 0 1 0 1 1 0 0
+K conv2 12 1 0 0 0 0 -1 0 0 -1 0
+K conv2 12 2 1 0 0 0 0 0 0 0 0
+K conv2 12 3 -1 -1 0 -1 -1 0 0 -1 0
+K conv2 12 5 0 0 0 0 0 -1 0 0 0
+K conv2 12 6 0 0 0 0 1 0 0 0 0
+K conv2 12 7 0 0 0 -1 0 0 -1 -1 0
+K conv2 13 0 0 0 0 -1 1 -1 0 -1 1
+K conv2 13 1 0 0 0 0 -1 0 0 1 -1
+K conv2 13 2 -1 -1 1 0 0 0 0 0 0
+K conv2 13 3 -1 1 0 -1 0 0 0 0 0
+K conv2 13 4 0 -1 1 -1 1 -1 1 -1 0
+K conv2 13 5 -1 -1 0 -1 0 0 1 0 1
+K conv2 13 6 0 -1 0 0 -1 0 0 0 0
+K conv2 13 7 0 0 0 -1 0 -1 0 -1 0
+K conv2 14 0 0 -1 0 1 1 -1 0 1 0
+K conv2 14 1 0 0 0 -1 0 0 0 -1 1
+K conv2 14 2 0 -1 0 0 0 -1 1 0 0
+K conv2 14 3 1 1 0 -1 0 1 1 -1 0
+K conv2 14 4 0 -1 1 1 0 -1 -1 1 0
+K conv2 14 5 1 0 0 0 0 -1 -1 0 1
+K conv2 14 6 0 0 0 -1 0 0 0 0 0
+K conv2 14 7 0 -1 0 -1 -1 -1 0 0 0
+K conv2 15 1 0 0 0 -1 1 -1 0 1 0
+K conv2 15 2 0 1 0 -1 1 0 -1 1 0
+K conv2 15 4 0 0 0 0 0 -1 0 0 0
+K conv2 15 5 0 0 0 0 -1 1 1 -1 1
+K conv2 15 7 0 0 0 0 -1 0 1 -1 1
+S conv3 0 0.1291
+S conv3 1 0.2132
+S conv3 2 0.3001
+S conv3 3 0.1049
+S conv3 4 0.1756
+S conv3 5 0.1259
+S conv3 6 0.0830
+S conv3 7 0.1417
+S conv3 8 0.1312
+S conv3 9 0.2117
+S conv3 10 0.1882
+S conv3 11 0.1738
+S conv3 12 0.1380
+S conv3 13 0.1965
+S conv3 14 0.1718
+S conv3 15 0.1636
+S conv3 16 0.2351
+S conv3 17 0.2548
+S conv3 18 0.2145
+S conv3 19 0.2684
+S conv3 20 0.2124
+S conv3 21 0.1659
+S conv3 22 0.2699
+S conv3 23 0.2594
+S conv3 24 0.2132
+S conv3 25 0.1302
+S conv3 26 0.1625
+S conv3 27 0.2186
+S conv3 28 0.2311
+S conv3 29 0.1761
+S conv3 30 0.1379
+S conv3 31 0.1580
+Q conv3 0 0 8 -1
+K conv3 0 1 0 1 1 0 0 0 0 0 1
+K conv3 0 2 1 0 0 -1 0 0 -1 0 0
+Q conv3 0 3 1 -1
+K conv3 0 4 0 0 0 1 0 -1 0 1 1
+Q conv3 0 5 3 1
+Q conv3 0 5 7 1
+Q conv3 0 6 3 -1
+Q conv3 0 6 6 -1
+K conv3 0 7 -1 -1 0 -1 -1 -1 -1 0 -1
+Q conv3 0 8 3 -1
+Q conv3 0 9 4 1
+Q conv3 0 13 6 1
+Q conv3 0 14 2 1
+Q conv3 0 14 4 1
+K conv3 0 15 0 1 1 -1 -1 0 0 0 0
+Q conv3 1 0 8 1
+Q conv3 1 1 7 1
+K conv3 1 2 0 -1 0 -1 -1 0 -1 -1 0
+Q conv3 1 3 1 1
+Q conv3 1 5 7 1
+K conv3 1 6 0 0 0 -1 -1 0 0 -1 -1
+K conv3 1 7 1 0 0 1 0 0 1 1 0
+K conv3 1 8 0 1 0 -1 -1 0 1 -1 -1
+Q conv3 1 9 4 -1
+Q conv3 1 10 0 -1
+Q conv3 1 10 4 1
+Q conv3 1 11 3 -1
+Q conv3 1 12 3 -1
+Q conv3 1 12 7 -1
+Q conv3 1 13 8 -1
+Q conv3 1 14 0 1
+Q conv3 1 14 3 1
+Q conv3 1 15 2 1
+Q conv3 2 0 4 1
+Q conv3 2 0 8 -1
+K conv3 2 1 -1 0 0 -1 0 1 0 0 1
+Q conv3 2 3 6 -1
+Q conv3 2 4 3 -1
+Q conv3 2 4 4 1
+Q conv3 2 4 7 1
+Q conv3 2 5 6 -1
+K conv3 2 6 0 0 0 1 -1 -1 1 0 0
+Q conv3 2 7 5 1
+Q conv3 2 8 4 -1
+Q conv3 2 11 1 -1
+Q conv3 2 11 6 1
+Q conv3 2 12 3 1
+Q conv3 2 12 6 1
+Q conv3 2 13 3 1
+Q conv3 2 14 3 -1
+Q conv3 2 14 5 1
+Q conv3 2 15 4 -1
+Q conv3 3 0 2 -1
+K conv3 3 1 -1 0 0 -1 -1 0 0 0 -1
+Q conv3 3 2 5 -1
+Q conv3 3 2 8 -1
+Q conv3 3 3 5 -1
+Q conv3 3 4 2 -1
+Q conv3 3 4 6 1
+Q conv3 3 4 8 -1
+Q conv3 3 5 5 1
+Q conv3 3 5 7 -1
+Q conv3 3 5 8 1
+Q conv3 3 6 5 1
+Q conv3 3 8 1 1
+Q conv3 3 9 0 -1
+Q conv3 3 9 4 -1
+Q conv3 3 9 5 1
+Q conv3 3 10 8 1
+Q conv3 3 12 2 1
+Q conv3 3 12 3 -1
+Q conv3 3 12 8 -1
+Q conv3 3 13 1 1
+Q conv3 3 13 8 1
+Q conv3 3 15 7 -1
+Q conv3 4 0 1 1
+Q conv3 4 1 2 1
+Q conv3 4 2 6 -1
+Q conv3 4 3 6 -1
+Q conv3 4 4 0 -1
+Q conv3 4 5 0 -1
+Q conv3 4 5 5 1
+Q conv3 4 6 6 1
+Q conv3 4 6 8 -1
+Q conv3 4 8 8 -1
+K conv3 4 10 0 0 1 -1 0 1 -1 1 1
+Q conv3 4 11 5 -1
+Q conv3 4 12 7 1
+Q conv3 4 13 5 -1
+Q conv3 4 14 8 -1
+Q conv3 4 15 2 -1
+Q conv3 4 15 5 -1
+Q conv3 4 15 6 1
+Q conv3 5 0 0 1
+Q conv3 5 0 1 1
+Q conv3 5 2 5 -1
+Q conv3 5 3 0 -1
+Q conv3 5 4 2 1
+Q conv3 5 4 3 1
+Q conv3 5 4 5 1
+Q conv3 5 4 8 1
+Q conv3 5 5 0 -1
+Q conv3 5 5 1 -1
+Q conv3 5 5 7 -1
+Q conv3 5 6 4 -1
+Q conv3 5 7 6 -1
+Q conv3 5 9 2 -1
+Q conv3 5 9 3 -1
+Q conv3 5 10 4 1
+Q conv3 5 11 8 1
+Q conv3 5 12 1 -1
+Q conv3 5 14 3 -1
+Q conv3 5 15 7 1
+Q conv3 6 1 2 1
+Q conv3 6 2 6 -1
+Q conv3 6 2 8 -1
+Q conv3 6 4 5 1
+Q conv3 6 5 0 -1
+Q conv3 6 5 2 -1
+Q conv3 6 9 0 1
+Q conv3 6 9 1 1
+Q conv3 6 9 3 1
+Q conv3 6 10 8 1
+Q conv3 6 13 7 1
+Q conv3 6 14 3 -1
+Q conv3 6 15 6 1
+K conv3 7 0 0 0 0 -1 0 1 -1 0 1
+Q conv3 7 1 5 -1
+Q conv3 7 2 8 1
+Q conv3 7 3 6 1
+K conv3 7 4 -1 0 1 -1 1 1 -1 0 1
+Q conv3 7 5 3 -1
+K conv3 7 6 0 0 -1 -1 -1 -1 0 0 -1
+Q conv3 7 8 0 1
+Q conv3 7 8 5 -1
+Q conv3 7 8 6 1
+Q conv3 7 9 3 -1
+Q conv3 7 9 4 1
+Q conv3 7 10 2 1
+Q conv3 7 11 0 1
+Q conv3 7 11 3 1
+Q conv3 7 12 0 1
+Q conv3 7 12 6 1
+Q conv3 7 13 2 1
+Q conv3 7 14 1 1
+Q conv3 7 15 8 -1
+Q conv3 8 1 0 1
+Q conv3 8 1 8 1
+Q conv3 8 2 0 -1
+Q conv3 8 2 5 -1
+Q conv3 8 4 0 1
+Q conv3 8 4 5 1
+Q conv3 8 6 6 1
+Q conv3 8 7 0 1
+Q conv3 8 7 5 1
+Q conv3 8 8 5 -1
+Q conv3 8 8 8 1
+Q conv3 8 10 4 -1
+Q conv3 8 11 0 -1
+Q conv3 8 11 6 1
+Q conv3 8 12 3 -1
+Q conv3 8 14 3 1
+Q conv3 8 15 0 -1
+Q conv3 8 15 6 1
+Q conv3 9 3 0 1
+Q conv3 9 3 1 1
+Q conv3 9 3 7 -1
+Q conv3 9 4 0 1
+Q conv3 9 4 3 1
+Q conv3 9 5 8 -1
+Q conv3 9 6 3 1
+Q conv3 9 8 1 -1
+Q conv3 9 10 0 -1
+Q conv3 9 10 7 1
+Q conv3 9 10 8 1
+Q conv3 9 12 1 -1
+Q conv3 9 12 7 1
+Q conv3 9 12 8 1
+Q conv3 9 13 0 1
+Q conv3 9 13 5 -1
+Q conv3 9 13 6 -1
+Q conv3 9 14 7 -1
+Q conv3 9 15 2 -1
+Q conv3 9 15 7 1
+Q conv3 10 1 0 1
+Q conv3 10 1 1 1
+Q conv3 10 1 8 1
+Q conv3 10 2 1 -1
+Q conv3 10 3 0 -1
+Q conv3 10 5 6 1
+Q conv3 10 6 1 -1
+Q conv3 10 6 6 -1
+Q conv3 10 7 8 1
+Q conv3 10 11 6 -1
+Q conv3 10 11 8 1
+Q conv3 10 12 6 -1
+Q conv3 10 14 0 1
+Q conv3 10 14 4 1
+Q conv3 11 0 1 -1
+Q conv3 11 0 3 -1
+Q conv3 11 0 4 -1
+Q conv3 11 1 0 -1
+Q conv3 11 1 5 1
+Q conv3 11 2 3 -1
+Q conv3 11 3 2 1
+Q conv3 11 4 3 -1
+Q conv3 11 6 0 1
+Q conv3 11 7 2 1
+Q conv3 11 10 8 1
+Q conv3 11 12 0 1
+Q conv3 11 14 1 1
+Q conv3 11 14 5 1
+Q conv3 11 14 8 1
+Q conv3 11 15 0 -1
+Q conv3 12 1 0 1
+Q conv3 12 1 7 1
+Q conv3 12 2 5 1
+Q conv3 12 2 6 -1
+Q conv3 12 3 2 -1
+Q conv3 12 3 6 -1
+Q conv3 12 5 0 1
+Q conv3 12 5 7 -1
+Q conv3 12 6 8 -1
+Q conv3 12 7 5 -1
+Q conv3 12 8 1 -1
+Q conv3 12 8 2 -1
+Q conv3 12 8 3 1
+K conv3 12 9 -1 -1 0 0 -1 -1 0 0 0
+Q conv3 12 10 0 -1
+Q conv3 12 10 6 -1
+Q conv3 12 11 8 -1
+Q conv3 12 12 4 -1
+Q conv3 12 12 6 1
+Q conv3 12 13 5 -1
+K conv3 12 14 1 -1 -1 1 1 0 0 1 1
+Q conv3 12 15 6 1
+Q conv3 13 0 8 -1
+Q conv3 13 1 0 -1
+Q conv3 13 2 0 1
+Q conv3 13 2 2 -1
+Q conv3 13 2 5 -1
+Q conv3 13 3 2 -1
+Q conv3 13 3 8 -1
+Q conv3 13 4 3 1
+Q conv3 13 4 5 -1
+Q conv3 13 5 5 -1
+Q conv3 13 6 2 1
+Q conv3 13 6 8 1
+Q conv3 13 7 0 -1
+Q conv3 13 7 3 -1
+Q conv3 13 7 5 1
+Q conv3 13 8 3 -1
+Q conv3 13 8 8 1
+Q conv3 13 10 1 -1
+Q conv3 13 10 7 -1
+Q conv3 13 10 8 1
+Q conv3 13 11 3 -1
+Q conv3 13 11 8 1
+Q conv3 13 12 2 1
+Q conv3 13 12 3 -1
+Q conv3 13 12 5 1
+Q conv3 13 12 7 -1
+Q conv3 13 13 6 -1
+Q conv3 13 13 7 -1
+Q conv3 13 14 4 -1
+Q conv3 13 14 5 1
+Q conv3 14 0 5 -1
+Q conv3 14 0 8 -1
+Q conv3 14 3 5 -1
+Q conv3 14 4 2 1
+Q conv3 14 4 7 1
+Q conv3 14 5 2 -1
+Q conv3 14 6 0 1
+Q conv3 14 6 2 -1
+Q conv3 14 7 5 1
+Q conv3 14 7 6 1
+Q conv3 14 9 0 1
+Q conv3 14 9 1 1
+Q conv3 14 10 1 1
+Q conv3 14 11 0 -1
+Q conv3 14 13 0 1
+Q conv3 14 14 0 -1
+Q conv3 14 15 6 -1
+Q conv3 14 15 7 -1
+Q conv3 15 1 4 1
+Q conv3 15 1 6 1
+Q conv3 15 2 0 -1
+Q conv3 15 2 5 1
+Q conv3 15 3 1 -1
+Q conv3 15 3 2 -1
+Q conv3 15 3 6 1
+Q conv3 15 5 3 -1
+Q conv3 15 5 8 1
+Q conv3 15 6 1 1
+Q conv3 15 9 7 -1
+Q conv3 15 9 8 -1
+Q conv3 15 11 0 -1
+Q conv3 15 11 5 -1
+Q conv3 15 11 6 1
+Q conv3 15 11 7 1
+Q conv3 15 12 0 1
+Q conv3 15 12 4 -1
+Q conv3 15 12 5 -1
+Q conv3 15 14 0 -1
+Q conv3 15 14 1 -1
+Q conv3 15 14 8 1
+Q conv3 15 15 3 1
+Q conv3 15 15 5 -1
+Q conv3 16 0 7 1
+Q conv3 16 3 2 1
+Q conv3 16 3 6 -1
+Q conv3 16 4 8 -1
+Q conv3 16 5 5 -1
+Q conv3 16 5 8 -1
+Q conv3 16 6 0 1
+Q conv3 16 10 0 1
+Q conv3 16 10 2 1
+Q conv3 16 10 6 -1
+Q conv3 16 10 7 -1
+Q conv3 16 12 2 1
+Q conv3 16 13 2 1
+Q conv3 17 1 2 1
+Q conv3 17 1 8 -1
+Q conv3 17 2 1 -1
+Q conv3 17 3 4 1
+Q conv3 17 5 7 1
+Q conv3 17 6 3 -1
+Q conv3 17 7 1 1
+Q conv3 17 7 8 -1
+Q conv3 17 8 6 -1
+Q conv3 17 8 7 -1
+Q conv3 17 10 4 1
+Q conv3 17 10 8 1
+Q conv3 17 11 1 1
+Q conv3 17 14 3 1
+Q conv3 17 15 6 -1
+Q conv3 17 15 7 -1
+Q conv3 18 0 4 1
+Q conv3 18 2 3 -1
+Q conv3 18 2 7 -1
+Q conv3 18 2 8 -1
+Q conv3 18 3 6 -1
+Q conv3 18 4 1 -1
+Q conv3 18 4 4 1
+Q conv3 18 4 7 1
+Q conv3 18 7 5 1
+Q conv3 18 9 4 1
+Q conv3 18 10 0 1
+Q conv3 18 10 1 1
+Q conv3 18 12 0 -1
+Q conv3 18 12 8 1
+Q conv3 18 13 1 -1
+Q conv3 18 14 6 1
+Q conv3 18 15 3 -1
+Q conv3 18 15 4 -1
+Q conv3 18 15 5 -1
+Q conv3 19 0 5 1
+Q conv3 19 0 7 -1
+Q conv3 19 2 7 -1
+Q conv3 19 3 0 -1
+Q conv3 19 3 3 -1
+Q conv3 19 3 6 -1
+Q conv3 19 4 3 -1
+Q conv3 19 6 7 1
+Q conv3 19 7 1 -1
+Q conv3 19 7 4 1
+Q conv3 19 7 7 1
+Q conv3 19 8 8 -1
+Q conv3 19 9 0 1
+Q conv3 19 9 6 -1
+Q conv3 19 10 2 1
+Q conv3 19 10 3 1
+Q conv3 19 10 5 1
+Q conv3 19 11 3 1
+Q conv3 19 11 6 1
+Q conv3 19 11 7 1
+Q conv3 19 14 1 1
+Q conv3 19 14 7 -1
+Q conv3 19 15 4 1
+Q conv3 19 15 7 1
+Q conv3 20 0 2 -1
+Q conv3 20 1 1 1
+Q conv3 20 1 4 1
+Q conv3 20 2 5 -1
+Q conv3 20 2 8 -1
+Q conv3 20 3 4 1
+Q conv3 20 3 5 -1
+Q conv3 20 3 6 1
+K conv3 20 4 1 0 -1 1 0 -1 1 0 -1
+Q conv3 20 5 5 1
+Q conv3 20 6 7 1
+Q conv3 20 6 8 1
+Q conv3 20 7 2 1
+Q conv3 20 7 3 -1
+Q conv3 20 7 4 -1
+Q conv3 20 7 8 1
+Q conv3 20 8 3 1
+Q conv3 20 9 0 1
+Q conv3 20 9 5 -1
+Q conv3 20 12 0 -1
+Q conv3 20 13 5 -1
+Q conv3 20 13 8 -1
+Q conv3 21 0 5 -1
+Q conv3 21 1 2 1
+Q conv3 21 1 5 1
+Q conv3 21 3 4 -1
+Q conv3 21 6 0 1
+Q conv3 21 6 8 1
+Q conv3 21 7 0 -1
+Q conv3 21 8 5 1
+Q conv3 21 9 0 1
+Q conv3 21 9 2 -1
+Q conv3 21 9 3 1
+Q conv3 21 9 5 -1
+Q conv3 21 10 4 1
+Q conv3 21 11 4 -1
+Q conv3 21 11 6 -1
+Q conv3 21 11 7 -1
+Q conv3 21 12 3 -1
+Q conv3 21 12 4 -1
+Q conv3 21 13 8 1
+Q conv3 21 14 5 1
+Q conv3 21 15 0 -1
+Q conv3 21 15 3 -1
+Q conv3 21 15 6 -1
+Q conv3 22 0 1 -1
+Q conv3 22 1 6 -1
+Q conv3 22 2 1 -1
+Q conv3 22 5 1 -1
+Q conv3 22 5 3 -1
+Q conv3 22 6 1 1
+Q conv3 22 6 8 -1
+Q conv3 22 8 3 -1
+Q conv3 22 8 5 -1
+Q conv3 22 9 5 -1
+Q conv3 22 10 6 1
+Q conv3 22 11 0 1
+Q conv3 22 11 1 1
+Q conv3 22 12 4 1
+Q conv3 22 12 8 -1
+Q conv3 22 14 8 1
+Q conv3 22 15 0 1
+Q conv3 22 15 4 -1
+Q conv3 23 0 3 -1
+Q conv3 23 1 5 1
+Q conv3 23 2 0 -1
+Q conv3 23 2 1 -1
+Q conv3 23 2 8 -1
+Q conv3 23 3 6 -1
+K conv3 23 4 -1 0 1 -1 0 1 -1 0 1
+Q conv3 23 6 0 1
+Q conv3 23 7 6 1
+Q conv3 23 9 3 -1
+Q conv3 23 9 8 1
+Q conv3 23 10 5 -1
+Q conv3 23 10 6 1
+Q conv3 23 10 7 1
+Q conv3 23 10 8 -1
+Q conv3 23 13 3 -1
+Q conv3 24 2 8 -1
+Q conv3 24 3 4 1
+Q conv3 24 4 8 1
+Q conv3 24 5 5 -1
+Q conv3 24 6 1 -1
+Q conv3 24 6 3 -1
+Q conv3 24 6 4 1
+Q conv3 24 6 5 1
+Q conv3 24 7 1 -1
+Q conv3 24 7 5 1
+Q conv3 24 7 7 1
+Q conv3 24 8 1 -1
+Q conv3 24 9 1 -1
+Q conv3 24 9 3 -1
+Q conv3 24 9 7 1
+Q conv3 24 10 5 -1
+Q conv3 24 10 8 -1
+Q conv3 24 11 3 -1
+Q conv3 24 11 4 -1
+Q conv3 24 12 1 -1
+Q conv3 24 12 2 1
+Q conv3 24 12 4 1
+Q conv3 24 12 5 1
+Q conv3 24 13 3 -1
+Q conv3 24 13 5 1
+Q conv3 24 13 6 1
+Q conv3 24 13 7 1
+Q conv3 25 0 1 -1
+Q conv3 25 0 3 -1
+Q conv3 25 0 5 -1
+Q conv3 25 2 1 -1
+Q conv3 25 2 3 -1
+Q conv3 25 2 4 -1
+Q conv3 25 2 5 -1
+Q conv3 25 3 0 1
+Q conv3 25 3 2 -1
+Q conv3 25 3 6 1
+Q conv3 25 3 8 -1
+Q conv3 25 4 2 -1
+Q conv3 25 4 5 -1
+Q conv3 25 6 0 -1
+Q conv3 25 6 3 -1
+Q conv3 25 7 1 -1
+Q conv3 25 7 7 1
+Q conv3 25 9 7 1
+Q conv3 25 10 0 1
+Q conv3 25 10 1 1
+Q conv3 25 12 8 1
+Q conv3 25 13 2 -1
+Q conv3 25 14 2 -1
+Q conv3 26 1 5 -1
+Q conv3 26 1 6 -1
+Q conv3 26 3 0 1
+Q conv3 26 3 1 -1
+K conv3 26 4 0 0 1 0 0 1 1 1 1
+Q conv3 26 5 6 1
+Q conv3 26 6 6 -1
+Q conv3 26 6 8 -1
+Q conv3 26 7 5 -1
+Q conv3 26 7 8 -1
+Q conv3 26 8 8 -1
+Q conv3 26 9 0 -1
+Q conv3 26 10 6 1
+Q conv3 26 10 8 1
+Q conv3 26 11 7 1
+Q conv3 26 11 8 -1
+Q conv3 26 12 0 1
+Q conv3 26 12 1 1
+Q conv3 26 13 6 -1
+Q conv3 26 13 7 -1
+Q conv3 26 13 8 -1
+Q conv3 26 14 0 1
+Q conv3 26 14 1 1
+Q conv3 26 14 3 -1
+Q conv3 26 14 4 -1
+Q conv3 26 15 8 -1
+Q conv3 27 1 3 -1
+Q conv3 27 2 4 -1
+Q conv3 27 2 5 -1
+Q conv3 27 3 7 -1
+Q conv3 27 3 8 -1
+Q conv3 27 4 2 -1
+Q conv3 27 5 0 -1
+Q conv3 27 8 0 1
+Q conv3 27 9 1 1
+Q conv3 27 9 6 1
+Q conv3 27 9 8 1
+Q conv3 27 10 5 1
+Q conv3 27 11 7 -1
+Q conv3 27 12 6 1
+Q conv3 27 12 7 1
+Q conv3 27 15 4 -1
+Q conv3 28 0 0 -1
+Q conv3 28 1 0 -1
+Q conv3 28 1 2 1
+Q conv3 28 1 6 -1
+Q conv3 28 3 0 -1
+Q conv3 28 3 2 -1
+Q conv3 28 4 0 -1
+Q conv3 28 5 2 -1
+Q conv3 28 6 8 -1
+Q conv3 28 7 1 -1
+Q conv3 28 7 5 1
+Q conv3 28 8 3 -1
+Q conv3 28 9 7 -1
+Q conv3 28 13 0 -1
+Q conv3 28 13 1 -1
+Q conv3 28 13 8 -1
+Q conv3 28 14 5 1
+Q conv3 28 14 6 -1
+Q conv3 28 15 5 -1
+Q conv3 29 1 3 1
+Q conv3 29 1 8 -1
+Q conv3 29 7 2 1
+Q conv3 29 7 3 1
+Q conv3 29 8 1 1
+Q conv3 29 8 2 1
+Q conv3 29 8 8 -1
+Q conv3 29 10 1 -1
+Q conv3 29 10 3 -1
+Q conv3 29 10 5 -1
+Q conv3 29 10 6 1
+Q conv3 29 10 8 1
+Q conv3 29 11 8 -1
+Q conv3 29 13 3 -1
+Q conv3 29 13 6 -1
+Q conv3 29 13 7 -1
+Q conv3 29 14 0 1
+Q conv3 29 14 3 1
+Q conv3 29 15 3 -1
+K conv3 30 0 0 -1 -1 -1 -1 -1 0 0 0
+Q conv3 30 2 0 -1
+Q conv3 30 3 8 -1
+Q conv3 30 4 5 1
+Q conv3 30 5 1 -1
+Q conv3 30 5 3 1
+Q conv3 30 5 8 -1
+Q conv3 31 2 1 -1
+Q conv3 31 2 6 -1
+Q conv3 31 3 2 -1
+Q conv3 31 3 5 1
+Q conv3 31 5 7 1
+Q conv3 31 6 2 1
+Q conv3 31 6 6 1
+Q conv3 31 7 6 1
+Q conv3 31 7 8 -1
+Q conv3 31 8 1 1
+Q conv3 31 9 6 1
+Q conv3 31 10 0 -1
+Q conv3 31 11 1 1
+Q conv3 31 11 7 -1
+Q conv3 31 11 8 -1
+Q conv3 31 12 1 1
+Q conv3 31 12 7 -1
+Q conv3 31 13 0 1
+Q conv3 31 13 4 1
+Q conv3 31 14 8 -1
+S conv4 0 1.497
+S conv4 1 1.347
+S conv4 2 2.261
+S conv4 3 1.998
+S conv4 4 1.479
+S conv4 5 1.530
+S conv4 6 2.458
+S conv4 7 1.007
+S conv4 8 1.548
+S conv4 9 1.287
+S conv4 10 1.743
+S conv4 11 1.673
+S conv4 12 1.610
+S conv4 13 1.467
+S conv4 14 1.736
+S conv4 15 1.963
+S conv4 16 2.124
+S conv4 17 1.591
+S conv4 18 2.183
+S conv4 19 1.674
+S conv4 20 2.217
+S conv4 21 2.079
+S conv4 22 1.348
+S conv4 23 1.403
+S conv4 24 1.788
+S conv4 25 1.774
+S conv4 26 1.848
+S conv4 27 1.480
+S conv4 28 1.456
+S conv4 29 1.523
+S conv4 30 2.177
+S conv4 31 2.489
+S conv4 32 1.269
+S conv4 33 1.581
+S conv4 34 1.648
+S conv4 35 1.616
+S conv4 36 2.319
+S conv4 37 1.729
+S conv4 38 1.815
+S conv4 39 1.597
+S conv4 40 2.236
+S conv4 41 2.053
+S conv4 42 1.854
+S conv4 43 1.147
+S conv4 44 1.347
+S conv4 45 1.613
+S conv4 46 1.891
+S conv4 47 1.750
+S fc 0 0.8976
+S fc 1 1.5437
+S fc 2 1.1536
+S fc 3 0.8293
+S fc 4 1.1394
+S fc 5 1.1841
+S fc 6 1.0827
+S fc 7 1.1746
+S fc 8 1.3218
+S fc 9 1.2581
+R fc 0 0 -1 0 0 -1 0 -1 0 1 0 0 -1 0 0 -1 1 -1 -1 0 0 -1 0 0 -1 0 1 1 0 0 0 0 0 -1 1 0 -1 0 -1 1 0 1 -1 0 -1 0 1 1 0
+R fc 1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 0 0 0 0 1 0 0 0 0 0 0
+R fc 2 0 0 0 0 0 -1 0 0 -1 1 0 0 0 0 0 -1 0 1 1 0 0 0 0 0 -1 0 0 0 1 0 1 1 1 1 0 -1 0 0 0 0 1 0 -1 1 0 1 0 1
+R fc 3 0 0 -1 0 -1 0 -1 0 1 1 1 0 0 0 -1 -1 0 0 -1 0 0 0 1 0 0 -1 0 0 0 0 0 0 -1 0 0 1 0 1 1 0 1 -1 0 0 1 -1 -1 1 -1
+R fc 4 0 1 0 1 -1 0 0 1 0 0 -1 1 0 0 -1 -1 0 0 0 1 0 1 0 0 0 0 0 1 -1 0 0 0 0 0 0 0 0 -1 0 0 0 -1 0 0 0 1 1 0
+R fc 5 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 -1 1 0 1 0 0 0 0 1 1 -1 0 0 0 1 0 0 0 -1 0 0 1 0 -1 1 -1 0 0 0 0 0 0 0
+R fc 6 1 0 0 0 1 0 0 -1 -1 0 0 0 1 0 1 -1 0 -1 0 0 0 1 0 0 1 1 0 0 0 0 0 0 1 -1 0 0 0 0 0 0 0 1 1 0 -1 0 -1 -1
+R fc 7 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 -1 0 0 -1 0 0 0 0 1 -1 1 0 0 0 0 0 0 0 1 1 0 -1 0 -1 1 0 0 0 0 0
+R fc 8 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 1 0 0 1 0 0 0 0 0 1 -1 0 0 0 0 0 0 0 0 0 -1 0 0 0 0 1 0 -1 1 0 0 0
+R fc 9 0 -1 0 0 0 0 -1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 0 0
+END
+TOOLS USED: Read /home/claude/wsp/llm/prompts/int2.txt only, 20 calls. All six calls in the first batch were rejected as too large (the first covered lines 0-119, which returned content): lines 120-239, 240-359, 360-479, 480-599, 600-719 and 720-839. The 720-839 call succeeded and returned lines 720-803. I then re-read with smaller chunks: 120-209, 210-299, 300-389, 390-479, 480-569, 570-659 and 660-719. Together with the successful 0-119 call (and the 720-803 return) the whole file was read. No other tool was used.

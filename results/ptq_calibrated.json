@@ -1,0 +1,28 @@
+{
+ "n_calib": 1024,
+ "scales": "RTN per-row max",
+ "gptq_int4": {
+  "val": 81.0,
+  "test": 80.66,
+  "agree_fp32": 93.48,
+  "codes_changed": 2636
+ },
+ "adaround_int4": {
+  "val": 80.98,
+  "test": 80.71,
+  "agree_fp32": 94.29,
+  "codes_changed": 2718
+ },
+ "gptq_int3": {
+  "val": 75.34,
+  "test": 75.04,
+  "agree_fp32": 82.62,
+  "codes_changed": 2631
+ },
+ "adaround_int3": {
+  "val": 77.18,
+  "test": 76.02,
+  "agree_fp32": 85.02,
+  "codes_changed": 2936
+ }
+}

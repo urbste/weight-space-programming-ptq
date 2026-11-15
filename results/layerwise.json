@@ -1,0 +1,408 @@
+{
+  "haiku": {
+    "val": 60.14,
+    "test": 59.9,
+    "per_class_test": {
+      "airplane": 81.9,
+      "automobile": 86.5,
+      "bird": 30.7,
+      "cat": 73.5,
+      "deer": 83.1,
+      "dog": 71.1,
+      "frog": 25.2,
+      "horse": 83.5,
+      "ship": 40.9,
+      "truck": 22.6
+    },
+    "agree_fp32": 64.57,
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "edits": {
+      "lines": 30,
+      "applied": 30,
+      "invalid": [],
+      "by_kind": {
+        "S": 11,
+        "K": 12,
+        "R": 7
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 23,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 216,
+        "scales_changed": 4,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 51,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 480,
+        "scales_changed": 7,
+        "biases_changed": 0
+      }
+    },
+    "curve": [
+      {
+        "after_chunk": 1,
+        "val": 59.62,
+        "test": 59.55
+      },
+      {
+        "after_chunk": 2,
+        "val": 59.62,
+        "test": 59.55
+      },
+      {
+        "after_chunk": 4,
+        "val": 59.62,
+        "test": 59.55
+      },
+      {
+        "after_chunk": 10,
+        "val": 59.62,
+        "test": 59.55
+      },
+      {
+        "after_chunk": 11,
+        "val": 60.14,
+        "test": 59.9
+      }
+    ]
+  },
+  "opus": {
+    "val": 78.62,
+    "test": 77.95,
+    "per_class_test": {
+      "airplane": 88.3,
+      "automobile": 95.5,
+      "bird": 69.9,
+      "cat": 73.2,
+      "deer": 76.3,
+      "dog": 72.5,
+      "frog": 78.3,
+      "horse": 71.5,
+      "ship": 78.4,
+      "truck": 75.6
+    },
+    "agree_fp32": 87.65,
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "edits": {
+      "lines": 1364,
+      "applied": 1364,
+      "invalid": [],
+      "by_kind": {
+        "Q": 1364
+      }
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 13,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 77,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 300,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 974,
+        "mean_abs_code_change": 1.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    },
+    "curve": [
+      {
+        "after_chunk": 1,
+        "val": 63.28,
+        "test": 63.63
+      },
+      {
+        "after_chunk": 2,
+        "val": 69.78,
+        "test": 70.03
+      },
+      {
+        "after_chunk": 4,
+        "val": 73.48,
+        "test": 73.09
+      },
+      {
+        "after_chunk": 10,
+        "val": 78.62,
+        "test": 77.95
+      },
+      {
+        "after_chunk": 11,
+        "val": 78.62,
+        "test": 77.95
+      }
+    ]
+  },
+  "sonnet": {
+    "val": 60.38,
+    "test": 60.39,
+    "per_class_test": {
+      "airplane": 80.8,
+      "automobile": 86.9,
+      "bird": 30.7,
+      "cat": 70.3,
+      "deer": 85.5,
+      "dog": 72.4,
+      "frog": 34.1,
+      "horse": 73.6,
+      "ship": 44.3,
+      "truck": 25.3
+    },
+    "agree_fp32": 64.86,
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "edits": {
+      "lines": 0,
+      "applied": 0,
+      "invalid": [],
+      "by_kind": {}
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    },
+    "curve": [
+      {
+        "after_chunk": 1,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 2,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 4,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 10,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 11,
+        "val": 60.38,
+        "test": 60.39
+      }
+    ]
+  },
+  "sonnet_run2": {
+    "val": 60.38,
+    "test": 60.39,
+    "per_class_test": {
+      "airplane": 80.8,
+      "automobile": 86.9,
+      "bird": 30.7,
+      "cat": 70.3,
+      "deer": 85.5,
+      "dog": 72.4,
+      "frog": 34.1,
+      "horse": 73.6,
+      "ship": 44.3,
+      "truck": 25.3
+    },
+    "agree_fp32": 64.86,
+    "chunks_answered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "edits": {
+      "lines": 0,
+      "applied": 0,
+      "invalid": [],
+      "by_kind": {}
+    },
+    "diff": {
+      "conv1": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 216,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv2": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 1152,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv3": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 4608,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "conv4": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 13824,
+        "scales_changed": 0,
+        "biases_changed": 0
+      },
+      "fc": {
+        "codes_changed": 0,
+        "mean_abs_code_change": 0.0,
+        "codes_total": 480,
+        "scales_changed": 0,
+        "biases_changed": 0
+      }
+    },
+    "curve": [
+      {
+        "after_chunk": 1,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 2,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 4,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 10,
+        "val": 60.38,
+        "test": 60.39
+      },
+      {
+        "after_chunk": 11,
+        "val": 60.38,
+        "test": 60.39
+      }
+    ]
+  }
+}

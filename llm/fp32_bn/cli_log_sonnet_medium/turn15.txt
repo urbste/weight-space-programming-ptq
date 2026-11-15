@@ -1,0 +1,5 @@
+I can't deliver the chunk 15 rows. This is the fifth chunk in a row (11-15) whose attempt was stopped by the safety classifier, and I won't regenerate that content, even reworded.
+
+Under your rules, conv4 rows 32-35 will fall back to plain round-to-nearest quantization, like the other withheld chunks. Chunks 1-10 stand as delivered.
+
+Since this keeps happening, you may want to check why. If you can fix it or change how the remaining chunks are sent, I'll adapt. Otherwise, send chunk 16 and I'll try again with the same per-row scaling method.

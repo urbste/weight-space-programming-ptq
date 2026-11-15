@@ -1,0 +1,32 @@
+I made 13 small edits to the first layer (conv1) and left everything else as plain round-to-nearest. I couldn't run the network, so I have no accuracy numbers for this change. It's a conservative improvement, not a measured one.
+
+**What I changed.** In each 3x3 kernel of conv1, I compared the sum of the float weights with the sum of the rounded codes. Where they differed by more than about 0.5 step, I changed the code of the weight with the largest rounding error in the right direction. This keeps each kernel's overall response to smooth image regions close to the float network. I only touched conv1, because it is the most sensitive layer and has few weights. Scales, biases and all other layers are unchanged.
+
+BEGIN
+Q conv1 0 0 5 -1
+Q conv1 0 2 6 0
+Q conv1 1 0 8 3
+Q conv1 1 1 0 1
+Q conv1 1 1 5 -1
+Q conv1 2 0 0 1
+Q conv1 2 1 7 -5
+Q conv1 3 0 6 1
+Q conv1 3 1 2 1
+Q conv1 4 1 6 5
+Q conv1 5 2 4 4
+Q conv1 6 1 1 -1
+Q conv1 7 1 6 -4
+END
+TOOLS USED: Read on /home/claude/wsp/llm/prompts/int4.txt only. Several Read calls were rejected for exceeding the token limit, so I re-read those ranges in smaller pieces. The calls that returned content covered these line ranges:
+- 0-120
+- 120-200
+- 200-280
+- 280-360
+- 360-430
+- 430-500
+- 500-570
+- 570-645
+- 645-720
+- 720-803
+
+This covers the whole file.

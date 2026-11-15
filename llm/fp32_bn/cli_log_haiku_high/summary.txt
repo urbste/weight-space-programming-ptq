@@ -1,0 +1,14 @@
+Each row got its own scale. I set the scale to max|w|/7 over that row's float weights, so the largest-magnitude weight maps exactly to ±7 and nothing needs clipping. Each code is then round(w/scale). This is plain round-to-nearest with a per-row max-abs scale, not a fitted or optimized quantizer.
+
+I chose it because it is simple, guarantees every code is in range, and bounds the error on each weight to half a step (scale/2). Each row's scale depends only on that row, so one outlier weight coarsens only its own row. I did not try MSE-optimal or percentile-clipped scales, which could give finer steps for the typical weights at the cost of clipping a few outliers. I had no data to test whether that trade-off helps, so I did not pursue it.
+
+I quantized the folded weights as given and left biases unchanged. I did not use the BatchNorm statistics beyond the folding already in the dump. The fc layer used the same method over its 48 inputs.
+
+The arithmetic was done by hand, not by running code. Values very close to a .5 boundary may have rounded one step differently than a script would, so a few codes could be off by one. I did not check the codes against the float network, since there is no data.
+
+The main problem is that chunks 2, 3 and 4 are incomplete:
+- Chunk 2: rows 5–15 are missing, and row 4 is cut off.
+- Chunk 3: rows 1–7 are missing, and row 0 is a placeholder.
+- Chunk 4: rows 10–15 are missing, and row 9 is cut off.
+
+Those rows will fall back to plain round-to-nearest. I can re-send them as a correction block whenever you want.

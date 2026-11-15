@@ -1,0 +1,10 @@
+**What I did (chunks 1-10: conv1, conv2, conv3 and conv4 rows 0-15):**
+- **Scale per row:** the row's largest absolute folded weight divided by 7, so the biggest weight lands on code ±7 and the full 4-bit range is used.
+- **Codes:** each folded weight divided by that scale, rounded to the nearest integer, clipped to [-7, 7]. I wrote the codes in dump order.
+- **Biases:** left untouched, as required.
+- **Why:** with no data and no way to run the network, max-abs scaling with round-to-nearest minimizes the worst-case rounding error per row. It avoids clipping and doesn't depend on any assumption about activations. It is essentially plain round-to-nearest, so I don't expect it to beat the baseline by much. I did no error compensation, and nothing here is verified by running the network.
+- **Risk:** I computed the roundings by hand, so a few codes may be off by one, mostly at near-tie values.
+
+**What is missing:**
+- Chunks 11-19 (conv4 rows 16-47 and fc rows 0-9) were stopped by the safety classifier and not delivered. Under your rules those rows fall back to plain round-to-nearest.
+- I said earlier that conv4 rows 0-11 were mine and the fallback began at row 12. That was wrong: chunk 10 (rows 12-15) was delivered, so the fallback starts at row 16.

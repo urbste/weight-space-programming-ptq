@@ -1,0 +1,32 @@
+{
+  "opus_lw": {
+    "responses": 15,
+    "output_tokens": 447217,
+    "max_context": 677485
+  },
+  "sonnet_lw": {
+    "responses": 13,
+    "output_tokens": 1967,
+    "max_context": 238437
+  },
+  "haiku_lw": {
+    "responses": 13,
+    "output_tokens": 73784,
+    "max_context": 260413
+  },
+  "opus_int4_whole": {
+    "responses": 9,
+    "output_tokens": 134152,
+    "max_context": 239393
+  },
+  "sonnet_int4_whole": {
+    "responses": 6,
+    "output_tokens": 10785,
+    "max_context": 239009
+  },
+  "haiku_int4_whole": {
+    "responses": 15,
+    "output_tokens": 32593,
+    "max_context": 238397
+  }
+}

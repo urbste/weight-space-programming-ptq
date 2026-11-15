@@ -1,0 +1,189 @@
+{
+ "val": 62.32,
+ "test": 62.59,
+ "per_class_test": {
+  "airplane": 83.3,
+  "automobile": 87.5,
+  "bird": 35.0,
+  "cat": 81.8,
+  "deer": 73.1,
+  "dog": 64.1,
+  "frog": 39.2,
+  "horse": 76.1,
+  "ship": 57.6,
+  "truck": 28.2
+ },
+ "agree_fp32": 67.14,
+ "rows_total": 114,
+ "rows_used": 93,
+ "rows_fallback_rtn": 21,
+ "fallback": [
+  [
+   "conv1",
+   0,
+   "missing"
+  ],
+  [
+   "conv1",
+   1,
+   "missing"
+  ],
+  [
+   "conv1",
+   2,
+   "missing"
+  ],
+  [
+   "conv1",
+   3,
+   "missing"
+  ],
+  [
+   "conv1",
+   4,
+   "missing"
+  ],
+  [
+   "conv1",
+   5,
+   "missing"
+  ],
+  [
+   "conv1",
+   6,
+   "missing"
+  ],
+  [
+   "conv1",
+   7,
+   "missing"
+  ],
+  [
+   "conv3",
+   30,
+   "length 143 != 144"
+  ],
+  [
+   "conv4",
+   0,
+   "length 290 != 288"
+  ],
+  [
+   "conv4",
+   27,
+   "length 287 != 288"
+  ],
+  [
+   "fc",
+   0,
+   "missing"
+  ],
+  [
+   "fc",
+   1,
+   "missing"
+  ],
+  [
+   "fc",
+   2,
+   "missing"
+  ],
+  [
+   "fc",
+   3,
+   "missing"
+  ],
+  [
+   "fc",
+   4,
+   "missing"
+  ],
+  [
+   "fc",
+   5,
+   "missing"
+  ],
+  [
+   "fc",
+   6,
+   "missing"
+  ],
+  [
+   "fc",
+   7,
+   "missing"
+  ],
+  [
+   "fc",
+   8,
+   "missing"
+  ],
+  [
+   "fc",
+   9,
+   "missing"
+  ]
+ ],
+ "unparsed_lines": [],
+ "chunks_answered": [
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18
+ ],
+ "vs_rtn": {
+  "conv1": {
+   "codes_equal_rtn": 1.0,
+   "scale_ratio_median": 1.0,
+   "scale_ratio_min": 1.0,
+   "scale_ratio_max": 1.0,
+   "zero_frac": 0.1759,
+   "zero_frac_rtn": 0.1759
+  },
+  "conv2": {
+   "codes_equal_rtn": 0.9948,
+   "scale_ratio_median": 1.0002,
+   "scale_ratio_min": 0.9989,
+   "scale_ratio_max": 1.0013,
+   "zero_frac": 0.2196,
+   "zero_frac_rtn": 0.2188
+  },
+  "conv3": {
+   "codes_equal_rtn": 0.9913,
+   "scale_ratio_median": 0.9999,
+   "scale_ratio_min": 0.9067,
+   "scale_ratio_max": 1.0028,
+   "zero_frac": 0.2099,
+   "zero_frac_rtn": 0.2112
+  },
+  "conv4": {
+   "codes_equal_rtn": 0.9171,
+   "scale_ratio_median": 0.9578,
+   "scale_ratio_min": 0.8155,
+   "scale_ratio_max": 1.0008,
+   "zero_frac": 0.1814,
+   "zero_frac_rtn": 0.1914
+  },
+  "fc": {
+   "codes_equal_rtn": 1.0,
+   "scale_ratio_median": 1.0,
+   "scale_ratio_min": 1.0,
+   "scale_ratio_max": 1.0,
+   "zero_frac": 0.175,
+   "zero_frac_rtn": 0.175
+  }
+ }
+}

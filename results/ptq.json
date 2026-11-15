@@ -1,0 +1,74 @@
+{
+  "checkpoint": "checkpoints/small_e500.npz",
+  "epoch": 500,
+  "torch_val": 0.8214,
+  "torch_test": 0.8143,
+  "fp32": {
+    "val": 82.14,
+    "test": 81.42,
+    "per_class_test": {
+      "airplane": 82.5,
+      "automobile": 89.5,
+      "bird": 69.9,
+      "cat": 65.5,
+      "deer": 81.7,
+      "dog": 75.5,
+      "frog": 87.0,
+      "horse": 82.4,
+      "ship": 90.9,
+      "truck": 89.3
+    },
+    "agree_fp32": 100.0
+  },
+  "rtn_int8": {
+    "val": 82.1,
+    "test": 81.45,
+    "per_class_test": {
+      "airplane": 83.4,
+      "automobile": 89.4,
+      "bird": 70.6,
+      "cat": 64.6,
+      "deer": 81.4,
+      "dog": 75.0,
+      "frog": 86.5,
+      "horse": 83.3,
+      "ship": 90.8,
+      "truck": 89.5
+    },
+    "agree_fp32": 98.62
+  },
+  "rtn_int4": {
+    "val": 60.38,
+    "test": 60.39,
+    "per_class_test": {
+      "airplane": 80.8,
+      "automobile": 86.9,
+      "bird": 30.7,
+      "cat": 70.3,
+      "deer": 85.5,
+      "dog": 72.4,
+      "frog": 34.1,
+      "horse": 73.6,
+      "ship": 44.3,
+      "truck": 25.3
+    },
+    "agree_fp32": 64.86
+  },
+  "rtn_int2": {
+    "val": 8.96,
+    "test": 8.6,
+    "per_class_test": {
+      "airplane": 0.0,
+      "automobile": 0.3,
+      "bird": 0.2,
+      "cat": 2.5,
+      "deer": 1.9,
+      "dog": 0.0,
+      "frog": 72.7,
+      "horse": 8.4,
+      "ship": 0.0,
+      "truck": 0.0
+    },
+    "agree_fp32": 8.8
+  }
+}

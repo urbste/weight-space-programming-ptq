@@ -1,0 +1,377 @@
+{
+ "val": 54.64,
+ "test": 54.88,
+ "per_class_test": {
+  "airplane": 78.8,
+  "automobile": 83.0,
+  "bird": 26.6,
+  "cat": 69.5,
+  "deer": 92.4,
+  "dog": 49.2,
+  "frog": 34.5,
+  "horse": 66.8,
+  "ship": 28.4,
+  "truck": 19.6
+ },
+ "agree_fp32": 58.18,
+ "rows_total": 114,
+ "rows_used": 28,
+ "rows_fallback_rtn": 86,
+ "fallback": [
+  [
+   "conv2",
+   1,
+   "length 73 != 72"
+  ],
+  [
+   "conv2",
+   4,
+   "length 73 != 72"
+  ],
+  [
+   "conv2",
+   5,
+   "length 73 != 72"
+  ],
+  [
+   "conv2",
+   8,
+   "length 73 != 72"
+  ],
+  [
+   "conv2",
+   9,
+   "length 76 != 72"
+  ],
+  [
+   "conv2",
+   10,
+   "length 73 != 72"
+  ],
+  [
+   "conv2",
+   12,
+   "length 75 != 72"
+  ],
+  [
+   "conv2",
+   13,
+   "length 75 != 72"
+  ],
+  [
+   "conv2",
+   15,
+   "length 73 != 72"
+  ],
+  [
+   "conv3",
+   2,
+   "length 145 != 144"
+  ],
+  [
+   "conv3",
+   3,
+   "length 145 != 144"
+  ],
+  [
+   "conv3",
+   4,
+   "length 147 != 144"
+  ],
+  [
+   "conv3",
+   7,
+   "length 146 != 144"
+  ],
+  [
+   "conv3",
+   9,
+   "length 143 != 144"
+  ],
+  [
+   "conv3",
+   10,
+   "length 141 != 144"
+  ],
+  [
+   "conv3",
+   11,
+   "length 142 != 144"
+  ],
+  [
+   "conv3",
+   14,
+   "length 142 != 144"
+  ],
+  [
+   "conv3",
+   15,
+   "length 151 != 144"
+  ],
+  [
+   "conv3",
+   16,
+   "length 140 != 144"
+  ],
+  [
+   "conv3",
+   19,
+   "length 145 != 144"
+  ],
+  [
+   "conv3",
+   22,
+   "length 151 != 144"
+  ],
+  [
+   "conv3",
+   24,
+   "length 146 != 144"
+  ],
+  [
+   "conv3",
+   25,
+   "length 148 != 144"
+  ],
+  [
+   "conv3",
+   26,
+   "length 148 != 144"
+  ],
+  [
+   "conv3",
+   28,
+   "length 139 != 144"
+  ],
+  [
+   "conv3",
+   29,
+   "length 147 != 144"
+  ],
+  [
+   "conv3",
+   30,
+   "length 143 != 144"
+  ],
+  [
+   "conv3",
+   31,
+   "length 141 != 144"
+  ],
+  [
+   "conv4",
+   0,
+   "length 324 != 288"
+  ],
+  [
+   "conv4",
+   1,
+   "length 295 != 288"
+  ],
+  [
+   "conv4",
+   2,
+   "length 279 != 288"
+  ],
+  [
+   "conv4",
+   3,
+   "length 281 != 288"
+  ],
+  [
+   "conv4",
+   4,
+   "length 281 != 288"
+  ],
+  [
+   "conv4",
+   5,
+   "length 285 != 288"
+  ],
+  [
+   "conv4",
+   6,
+   "length 317 != 288"
+  ],
+  [
+   "conv4",
+   7,
+   "length 299 != 288"
+  ],
+  [
+   "conv4",
+   8,
+   "length 285 != 288"
+  ],
+  [
+   "conv4",
+   9,
+   "length 291 != 288"
+  ],
+  [
+   "conv4",
+   10,
+   "length 342 != 288"
+  ],
+  [
+   "conv4",
+   11,
+   "length 306 != 288"
+  ],
+  [
+   "conv4",
+   12,
+   "length 294 != 288"
+  ],
+  [
+   "conv4",
+   13,
+   "length 287 != 288"
+  ],
+  [
+   "conv4",
+   14,
+   "length 292 != 288"
+  ],
+  [
+   "conv4",
+   15,
+   "length 285 != 288"
+  ],
+  [
+   "conv4",
+   16,
+   "missing"
+  ],
+  [
+   "conv4",
+   17,
+   "missing"
+  ],
+  [
+   "conv4",
+   18,
+   "missing"
+  ],
+  [
+   "conv4",
+   19,
+   "missing"
+  ],
+  [
+   "conv4",
+   20,
+   "missing"
+  ],
+  [
+   "conv4",
+   21,
+   "missing"
+  ],
+  [
+   "conv4",
+   22,
+   "missing"
+  ],
+  [
+   "conv4",
+   23,
+   "missing"
+  ],
+  [
+   "conv4",
+   24,
+   "missing"
+  ],
+  [
+   "conv4",
+   25,
+   "missing"
+  ],
+  [
+   "conv4",
+   26,
+   "missing"
+  ],
+  [
+   "conv4",
+   27,
+   "missing"
+  ],
+  [
+   "conv4",
+   28,
+   "missing"
+  ],
+  [
+   "conv4",
+   29,
+   "missing"
+  ],
+  [
+   "conv4",
+   30,
+   "missing"
+  ],
+  [
+   "conv4",
+   31,
+   "missing"
+  ]
+ ],
+ "unparsed_lines": [],
+ "chunks_answered": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10
+ ],
+ "vs_rtn": {
+  "conv1": {
+   "codes_equal_rtn": 0.9815,
+   "scale_ratio_median": 1.0003,
+   "scale_ratio_min": 0.9984,
+   "scale_ratio_max": 1.0022,
+   "zero_frac": 0.1759,
+   "zero_frac_rtn": 0.1759
+  },
+  "conv2": {
+   "codes_equal_rtn": 0.9983,
+   "scale_ratio_median": 1.0,
+   "scale_ratio_min": 0.9991,
+   "scale_ratio_max": 1.0013,
+   "zero_frac": 0.2188,
+   "zero_frac_rtn": 0.2188
+  },
+  "conv3": {
+   "codes_equal_rtn": 0.9395,
+   "scale_ratio_median": 1.0,
+   "scale_ratio_min": 0.9986,
+   "scale_ratio_max": 1.0019,
+   "zero_frac": 0.2099,
+   "zero_frac_rtn": 0.2112
+  },
+  "conv4": {
+   "codes_equal_rtn": 1.0,
+   "scale_ratio_median": 1.0,
+   "scale_ratio_min": 1.0,
+   "scale_ratio_max": 1.0,
+   "zero_frac": 0.1914,
+   "zero_frac_rtn": 0.1914
+  },
+  "fc": {
+   "codes_equal_rtn": 1.0,
+   "scale_ratio_median": 1.0,
+   "scale_ratio_min": 1.0,
+   "scale_ratio_max": 1.0,
+   "zero_frac": 0.175,
+   "zero_frac_rtn": 0.175
+  }
+ }
+}

@@ -1,0 +1,28 @@
+[project]
+name = "weight-space-programming-ptq"
+version = "1.0.0"
+description = "Code, prompts and LLM replies for 'Can a Frontier LLM Repair a Quantized Network by Tool-Free Weight-Space Programming?'"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.13",
+    "matplotlib>=3.9",
+]
+
+[project.optional-dependencies]
+# only for training (train.py) and the calibrated baselines AdaRound/GPTQ (analysis/ptq_calibrated.py)
+torch = ["torch>=2.4"]
+
+# The scripts are run from the repository root; nothing is installed as a package, only the dependencies.
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
+py-modules = []
+
+[tool.uv]
+package = false

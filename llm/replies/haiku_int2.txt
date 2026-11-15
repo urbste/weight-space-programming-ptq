@@ -1,0 +1,25 @@
+I read the whole file in 16 chunks. The 2-bit network is RTN with scale = max|w|, so most weights round to zero and the rest are forced to the full row magnitude. I rebuilt the fc layer, which is the final classifier and only 10 x 48 weights. For each row I used a ternary, least-squares style quantizer: codes are sign(u) where |u| > 0.25 (u in RTN units), and the row scale is the mean |u| over the kept entries times the old scale. This keeps more of the weight signal than the RTN codes, which zero out every |u| < 0.5. I left conv1 to conv4 and all biases unchanged, because I could not calibrate them without data or BatchNorm statistics. I did not verify the accuracy gain, and the 9% baseline suggests the frozen conv features still limit the result.
+
+BEGIN
+R fc 0 0 -1 -1 0 -1 0 -1 0 1 0 0 -1 0 0 -1 1 -1 -1 0 0 -1 0 0 -1 0 1 1 0 0 0 0 0 -1 1 0 -1 0 -1 1 0 1 -1 -1 -1 0 1 1 0
+R fc 1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 0 0 0 0 1 0 0 0 0 0 0
+R fc 2 0 0 0 0 0 -1 0 0 -1 1 0 0 0 0 0 -1 0 1 1 0 0 0 0 0 -1 0 -1 -1 1 0 1 1 1 1 -1 -1 0 0 0 0 1 -1 -1 1 0 1 0 1
+R fc 3 0 0 -1 -1 -1 0 -1 0 1 1 1 0 0 0 -1 -1 0 0 -1 0 0 0 1 0 0 -1 0 0 0 0 0 0 0 0 1 0 1 1 0 1 -1 0 0 1 -1 -1 1 -1
+R fc 4 0 1 0 1 -1 0 0 1 0 -1 -1 1 0 0 -1 -1 0 0 0 1 0 1 -1 0 0 0 0 1 -1 0 -1 0 0 1 0 1 0 -1 0 0 0 -1 0 1 -1 1 1 1
+R fc 5 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 -1 1 0 1 -1 0 0 0 1 1 -1 0 0 0 1 0 0 0 -1 0 0 1 0 -1 1 -1 0 0 0 0 0 0 0
+R fc 6 1 0 0 0 1 0 0 -1 -1 0 0 0 1 0 1 -1 0 -1 0 0 0 1 -1 0 1 1 0 0 0 0 0 0 1 -1 0 0 0 0 0 0 -1 1 1 0 -1 0 -1 -1
+R fc 7 -1 0 1 0 0 1 0 0 0 -1 0 0 -1 0 0 -1 -1 0 -1 0 0 -1 0 0 0 -1 1 -1 1 0 -1 0 0 0 0 1 1 0 -1 -1 -1 1 0 0 0 0 0
+R fc 8 -1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 1 0 0 1 -1 0 0 0 0 1 -1 0 0 0 0 0 0 0 0 0 0 -1 0 0 0 0 1 0 -1 1 -1 -1 0
+R fc 9 0 -1 0 0 0 0 -1 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 1 0 0 -1 1 0 0 0 0 0 0 0 0 1 0 0 -1 0 1 0 0 -1 1 0 0 0
+S fc 0 0.833
+S fc 1 1.387
+S fc 2 1.007
+S fc 3 0.853
+S fc 4 0.916
+S fc 5 1.095
+S fc 6 0.925
+S fc 7 0.965
+S fc 8 1.118
+S fc 9 1.050
+END
+TOOLS USED: Read /home/claude/wsp/llm/prompts/int2.txt lines 1-120; Read same file lines 121-240 (failed, file chunk too large, no content returned); Read same file lines 121-170; 171-220; 221-270; 271-320; 321-370; 371-420; 421-470; 471-520; 521-570; 571-620; 621-670; 671-720; 721-770; 771-810 (end of file). No other tools.

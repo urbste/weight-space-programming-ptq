@@ -1,0 +1,82 @@
+{
+ "int8": {
+  "folded_val": 82.1,
+  "folded_test": 81.45,
+  "folded_agree": 98.62,
+  "unfolded_val": 82.1,
+  "unfolded_test": 81.45,
+  "unfolded_agree": 98.62
+ },
+ "int6": {
+  "folded_val": 81.34,
+  "folded_test": 80.86,
+  "folded_agree": 95.52,
+  "unfolded_val": 81.34,
+  "unfolded_test": 80.86,
+  "unfolded_agree": 95.52
+ },
+ "int5": {
+  "folded_val": 78.16,
+  "folded_test": 77.91,
+  "folded_agree": 87.76,
+  "unfolded_val": 78.16,
+  "unfolded_test": 77.91,
+  "unfolded_agree": 87.76
+ },
+ "int4": {
+  "folded_val": 60.38,
+  "folded_test": 60.39,
+  "folded_agree": 64.86,
+  "unfolded_val": 60.38,
+  "unfolded_test": 60.39,
+  "unfolded_agree": 64.86
+ },
+ "int3": {
+  "folded_val": 29.2,
+  "folded_test": 28.7,
+  "folded_agree": 29.82,
+  "unfolded_val": 29.2,
+  "unfolded_test": 28.7,
+  "unfolded_agree": 29.82
+ },
+ "int2": {
+  "folded_val": 8.96,
+  "folded_test": 8.6,
+  "folded_agree": 8.8,
+  "unfolded_val": 8.96,
+  "unfolded_test": 8.6,
+  "unfolded_agree": 8.8
+ },
+ "row_range_spread": {
+  "conv1": {
+   "folded_max_over_min": 3.37,
+   "unfolded_max_over_min": 1.71
+  },
+  "conv2": {
+   "folded_max_over_min": 3.25,
+   "unfolded_max_over_min": 2.13
+  },
+  "conv3": {
+   "folded_max_over_min": 3.61,
+   "unfolded_max_over_min": 1.94
+  },
+  "conv4": {
+   "folded_max_over_min": 2.47,
+   "unfolded_max_over_min": 2.22
+  }
+ },
+ "per_tensor": {
+  "int8": {
+   "folded_test": 81.49,
+   "unfolded_test": 81.39
+  },
+  "int6": {
+   "folded_test": 79.52,
+   "unfolded_test": 78.65
+  },
+  "int4": {
+   "folded_test": 47.5,
+   "unfolded_test": 57.41
+  }
+ }
+}

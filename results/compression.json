@@ -1,0 +1,50 @@
+{
+  "encodings": {
+    "current: u (2 dec) + q": {
+      "chars": 160900,
+      "relative": 1.0
+    },
+    "u only (2 dec), q = round(u)": {
+      "chars": 111889,
+      "relative": 0.695
+    },
+    "u only (1 dec)": {
+      "chars": 91609,
+      "relative": 0.569
+    },
+    "packed: 2 chars per weight (code letter + residual letter), no separators": {
+      "chars": 40560,
+      "relative": 0.252
+    },
+    "sparse: only |r|>=0.3 candidates (8176 of 20280) as 'pos:r', + per-kernel sum": {
+      "chars": 60106,
+      "relative": 0.374
+    }
+  },
+  "method_from_view": {
+    "exact float": {
+      "val": 77.74,
+      "test": 77.8
+    },
+    "u to 2 decimals (current file)": {
+      "val": 77.86,
+      "test": 77.93
+    },
+    "u to 1 decimal": {
+      "val": 76.72,
+      "test": 75.91
+    },
+    "residual in 3 levels (q-0.33/q/q+0.33)": {
+      "val": 78.34,
+      "test": 78.68
+    },
+    "residual sign only (q +- 0.25)": {
+      "val": 65.9,
+      "test": 66.45
+    },
+    "no float info (u = q)": {
+      "val": 60.38,
+      "test": 60.39
+    }
+  }
+}

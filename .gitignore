@@ -218,3 +218,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- project ----
+# data (download CIFAR-10, see REPRODUCE.md)
+data/
+# user runs of llm/run_cli.sh
+runs/
+__pycache__/
+*.pyc
+# training intermediates (the final checkpoint small_e500.* is kept)
+checkpoints/*_last.pt
+checkpoints/*_state.pt
+# backups and old drafts
+*.bak
+paper/main_v1_techreport.*
+paper/main_v2_long.*
+# not part of the public repository
+archive/
+hit_limit_shit.txt
+cleanup_old.sh
+paper/writing_rules.txt

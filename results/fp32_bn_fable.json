@@ -1,0 +1,85 @@
+{
+ "val": 69.92,
+ "test": 69.97,
+ "per_class_test": {
+  "airplane": 83.9,
+  "automobile": 95.9,
+  "bird": 50.1,
+  "cat": 76.2,
+  "deer": 84.3,
+  "dog": 36.1,
+  "frog": 69.6,
+  "horse": 70.4,
+  "ship": 66.6,
+  "truck": 66.6
+ },
+ "agree_fp32": 74.59,
+ "rows_total": 114,
+ "rows_used": 114,
+ "rows_fallback_rtn": 0,
+ "fallback": [],
+ "unparsed_lines": [],
+ "chunks_answered": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "vs_rtn": {
+  "conv1": {
+   "codes_equal_rtn": 0.9583,
+   "scale_ratio_median": 0.9908,
+   "scale_ratio_min": 0.9738,
+   "scale_ratio_max": 1.0022,
+   "zero_frac": 0.1759,
+   "zero_frac_rtn": 0.1759
+  },
+  "conv2": {
+   "codes_equal_rtn": 0.9392,
+   "scale_ratio_median": 0.982,
+   "scale_ratio_min": 0.8885,
+   "scale_ratio_max": 0.9979,
+   "zero_frac": 0.2135,
+   "zero_frac_rtn": 0.2188
+  },
+  "conv3": {
+   "codes_equal_rtn": 0.9442,
+   "scale_ratio_median": 0.9749,
+   "scale_ratio_min": 0.8256,
+   "scale_ratio_max": 1.0051,
+   "zero_frac": 0.2066,
+   "zero_frac_rtn": 0.2112
+  },
+  "conv4": {
+   "codes_equal_rtn": 0.8915,
+   "scale_ratio_median": 0.9525,
+   "scale_ratio_min": 0.8155,
+   "scale_ratio_max": 0.9986,
+   "zero_frac": 0.1801,
+   "zero_frac_rtn": 0.1914
+  },
+  "fc": {
+   "codes_equal_rtn": 0.9396,
+   "scale_ratio_median": 0.9729,
+   "scale_ratio_min": 0.9228,
+   "scale_ratio_max": 0.9982,
+   "zero_frac": 0.1708,
+   "zero_frac_rtn": 0.175
+  }
+ }
+}

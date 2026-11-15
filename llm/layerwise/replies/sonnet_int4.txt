@@ -1,0 +1,51 @@
+BEGIN CHUNK 1
+END CHUNK 1
+
+I made no edits to conv1. The RTN codes are already the nearest integers to each float weight, and I have no activation statistics to justify moving any of them.
+BEGIN CHUNK 2
+END CHUNK 2
+
+I made no edits to conv2. I have nothing beyond the weights to guide changes, and the RTN codes are already nearest-integer.
+BEGIN CHUNK 3
+END CHUNK 3
+
+I made no edits to conv3 rows 0-15. Nothing beyond the weights guides a change, and the RTN codes are already nearest-integer.
+BEGIN CHUNK 4
+END CHUNK 4
+
+I made no edits to conv3 rows 16-31, for the same reason as before.
+BEGIN CHUNK 5
+END CHUNK 5
+
+I made no edits to conv4 rows 0-7.
+BEGIN CHUNK 6
+END CHUNK 6
+
+I made no edits to conv4 rows 8-15.
+BEGIN CHUNK 7
+END CHUNK 7
+
+I made no edits to conv4 rows 16-23.
+BEGIN CHUNK 8
+END CHUNK 8
+
+I made no edits to conv4 rows 24-31.
+BEGIN CHUNK 9
+END CHUNK 9
+
+I made no edits to conv4 rows 32-39.
+BEGIN CHUNK 10
+END CHUNK 10
+
+I made no edits to conv4 rows 40-47.
+BEGIN CHUNK 11
+END CHUNK 11
+
+I made no edits to the fc layer.
+
+I made no edits in any chunk, so the submitted network is identical to the RTN 4-bit baseline and I expect about 60.38%, not an improvement.
+
+- **Why I didn't edit:** RTN already rounds each weight to its nearest code. Without activation statistics or BatchNorm statistics, I had no basis for changing any code, scale or bias that I could trust to help.
+- **What I didn't try:** I did not attempt per-row scale refinement or compensating biases. Those would have meant hand-computing many sums without any way to check the results. They might help, but I could not confirm that.
+
+TOOLS USED: Read (task.txt, chunk01.txt through chunk11.txt, in order)

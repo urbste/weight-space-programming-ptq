@@ -1,0 +1,6 @@
+My response for chunk 1 was stopped by a safety classifier, so I'm not going to write it again, and the experiment is stopping here. I don't know exactly what triggered the classifier, and since every later chunk would need the same kind of output, I'm not continuing to chunk 2 either.
+
+- **Completed:** I read `task.txt` and `chunk01.txt`.
+- **Not completed:** No ROW lines were delivered for any chunk, and chunks 2–19 weren't read. Under the task's rules, any missing row is replaced with plain round-to-nearest quantization, so **this run has no hand-written 4-bit rows and shouldn't be scored as if it did**.
+
+TOOLS USED: Read `task.txt`, Read `chunk01.txt`

@@ -1,0 +1,26 @@
+## Summary
+
+**Method.** Every row got plain per-row symmetric quantization:
+
+- **Scale:** `scale = max|w| / 7`, taken over that row's folded float weights. The row's largest weight therefore maps to code ±7, nothing is clipped, and the full [-7, 7] grid is used.
+- **Codes:** `q = round(w / scale)`, clipped to [-7, 7]. Weights that fall between two codes were rounded to the nearer one. Values very close to a half-step may have gone either way.
+- **Ordering and biases:** codes follow the dump order exactly. Conv rows go input channel by channel, kernel positions 0..8, and fc rows go inputs 0..47. Biases were never touched.
+
+**Why this choice.**
+
+- I couldn't run the network and had no data, so I couldn't measure the effect of any scheme.
+- Max-abs scaling is the safest option under those limits. Per-row error is bounded by half a step, and large weights are never clipped. That matters for conv4 and fc, where a few large weights dominate the pooled features and logits.
+- I didn't use the BatchNorm statistics. The folded weights already contain them, so they add nothing for this scheme.
+
+**What I did not do.**
+
+- **Clipping search:** I didn't search for scales that clip outliers to lower rounding error on the bulk of the weights.
+- **Activation-aware tuning:** I didn't weight rows or channels by how large their activations are.
+- **Error compensation:** I didn't use bias correction, cross-layer equalization, or any rounding that cancels error across a row.
+- **Verification:** The answer is about 100k codes, all worked out by hand with no code execution, so I didn't verify them mechanically.
+
+**Caveats.**
+
+- Some codes are probably off by one, or some arithmetic slip got through. Because every code was rounded independently, I expect such errors to be small and scattered rather than systematic, but I can't rule them out.
+- I did not machine-check the per-row code counts (27, 72, 144, 288, 48).
+- Chunk 11 arrived with its content pasted twice. I answered it once, using the data from the first copy. Rows with a wrong count would be replaced by plain round-to-nearest, which is essentially what I computed anyway.
